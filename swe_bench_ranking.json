@@ -1,0 +1,334 @@
+{
+  "swe_bench_verified_ranking": {
+    "last_updated": "2025-08-07",
+    "benchmark_info": {
+      "name": "SWE-bench Verified",
+      "description": "Human-validated subset of SWE-bench with 500 tasks",
+      "total_tasks": 500
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "model_name": "GPT-5",
+        "score": 74.9,
+        "organization": "OpenAI",
+        "notes": "Released August 2025, unified reasoning model",
+        "computational_cost": "High",
+        "api_cost_input": "$1.25/1M tokens",
+        "api_cost_output": "$10.00/1M tokens"
+      },
+      {
+        "rank": 2,
+        "model_name": "Grok 4",
+        "score": 73.5,
+        "organization": "xAI",
+        "notes": "Released July 2025, 256K context window",
+        "computational_cost": "Very High",
+        "api_cost_input": "$5.00/1M tokens (est.)",
+        "api_cost_output": "$15.00/1M tokens (est.)"
+      },
+      {
+        "rank": 3,
+        "model_name": "Claude 4 Sonnet",
+        "score": 72.7,
+        "organization": "Anthropic",
+        "notes": "Released May 2025, outperforms Opus on practical coding",
+        "computational_cost": "Medium",
+        "api_cost_input": "$3.00/1M tokens",
+        "api_cost_output": "$15.00/1M tokens"
+      },
+      {
+        "rank": 4,
+        "model_name": "Claude 4 Opus",
+        "score": 72.5,
+        "organization": "Anthropic",
+        "notes": "79.4% with parallel test-time compute",
+        "computational_cost": "High",
+        "api_cost_input": "$15.00/1M tokens",
+        "api_cost_output": "$75.00/1M tokens"
+      },
+      {
+        "rank": 5,
+        "model_name": "OpenAI o3",
+        "score": 72.0,
+        "organization": "OpenAI",
+        "notes": "Reported but not publicly released",
+        "computational_cost": "Very High",
+        "api_cost_input": "$1.00/1M tokens",
+        "api_cost_output": "$4.00/1M tokens"
+      },
+      {
+        "rank": 6,
+        "model_name": "OpenAI o3 (Low Compute)",
+        "score": 70.3,
+        "organization": "OpenAI",
+        "notes": "Lower compute version of o3",
+        "computational_cost": "High",
+        "api_cost_input": "$1.00/1M tokens",
+        "api_cost_output": "$4.00/1M tokens"
+      },
+      {
+        "rank": 7,
+        "model_name": "Kimi K2 (Parallel Test-time Compute)",
+        "score": 71.6,
+        "organization": "Moonshot AI",
+        "notes": "With parallel test-time compute sampling",
+        "computational_cost": "High",
+        "api_cost_input": "$0.15/1M tokens",
+        "api_cost_output": "$2.50/1M tokens"
+      },
+      {
+        "rank": 8,
+        "model_name": "o4-mini",
+        "score": 68.1,
+        "organization": "OpenAI",
+        "notes": "Fast cost-efficient reasoning model",
+        "computational_cost": "Low",
+        "api_cost_input": "$1.10/1M tokens",
+        "api_cost_output": "$4.40/1M tokens"
+      },
+      {
+        "rank": 9,
+        "model_name": "DeepSeek R1 (Agentic)",
+        "score": 65.8,
+        "organization": "DeepSeek",
+        "notes": "Open source reasoning model",
+        "computational_cost": "Medium",
+        "api_cost_input": "$0.55/1M tokens",
+        "api_cost_output": "$2.19/1M tokens"
+      },
+      {
+        "rank": 10,
+        "model_name": "Kimi K2",
+        "score": 65.8,
+        "organization": "Moonshot AI",
+        "notes": "Open-source trillion parameter MoE model, single attempt",
+        "computational_cost": "Medium",
+        "api_cost_input": "$0.15/1M tokens",
+        "api_cost_output": "$2.50/1M tokens"
+      },
+      {
+        "rank": 11,
+        "model_name": "Mini-SWE-agent",
+        "score": 65.0,
+        "organization": "Open Source",
+        "notes": "Achieved with 100 lines of Python code",
+        "computational_cost": "Low",
+        "api_cost_input": "Free/Open Source",
+        "api_cost_output": "Free/Open Source"
+      },
+      {
+        "rank": 12,
+        "model_name": "GLM-4.5",
+        "score": 64.2,
+        "organization": "Zhipu AI",
+        "notes": "Chinese AI model",
+        "computational_cost": "Medium",
+        "api_cost_input": "$2.00/1M tokens (est.)",
+        "api_cost_output": "$6.00/1M tokens (est.)"
+      },
+      {
+        "rank": 13,
+        "model_name": "Gemini 2.5 Flash",
+        "score": 63.8,
+        "organization": "Google",
+        "notes": "Thinking model with custom agent setup",
+        "computational_cost": "Medium",
+        "api_cost_input": "$0.30/1M tokens",
+        "api_cost_output": "$2.50/1M tokens"
+      },
+      {
+        "rank": 14,
+        "model_name": "Gemini 2.5 Pro",
+        "score": 63.2,
+        "organization": "Google",
+        "notes": "Google's flagship model",
+        "computational_cost": "High",
+        "api_cost_input": "$5.00/1M tokens (est.)",
+        "api_cost_output": "$15.00/1M tokens (est.)"
+      },
+      {
+        "rank": 15,
+        "model_name": "Claude 3.7 Sonnet",
+        "score": 62.3,
+        "organization": "Anthropic",
+        "notes": "Previous generation model",
+        "computational_cost": "Medium"
+      },
+      {
+        "rank": 16,
+        "model_name": "GPT-OSS-120b",
+        "score": 62.4,
+        "organization": "OpenAI",
+        "notes": "Open source competitive model",
+        "computational_cost": "High"
+      },
+      {
+        "rank": 17,
+        "model_name": "CodeStory Midwit Agent + swe-search",
+        "score": 62.0,
+        "organization": "CodeStory",
+        "notes": "Multi-agent brute force approach",
+        "computational_cost": "Very High"
+      },
+      {
+        "rank": 18,
+        "model_name": "GPT-4.1",
+        "score": 54.6,
+        "organization": "OpenAI",
+        "notes": "OpenAI's latest general purpose model",
+        "computational_cost": "High"
+      },
+      {
+        "rank": 19,
+        "model_name": "Claude 3.5 Sonnet (Latest)",
+        "score": 50.8,
+        "organization": "Anthropic",
+        "notes": "Latest production version",
+        "computational_cost": "Medium"
+      },
+      {
+        "rank": 20,
+        "model_name": "DeepSeek R1",
+        "score": 49.2,
+        "organization": "DeepSeek",
+        "notes": "Base reasoning model without agentic scaffolding",
+        "computational_cost": "Medium",
+        "api_cost_input": "$0.55/1M tokens",
+        "api_cost_output": "$2.19/1M tokens"
+      },
+      {
+        "rank": 21,
+        "model_name": "Claude 3.5 Sonnet (Upgraded)",
+        "score": 49.0,
+        "organization": "Anthropic",
+        "notes": "Previous state-of-the-art",
+        "computational_cost": "Medium"
+      },
+      {
+        "rank": 22,
+        "model_name": "OpenAI o1",
+        "score": 48.9,
+        "organization": "OpenAI",
+        "notes": "First reasoning model",
+        "computational_cost": "High",
+        "api_cost_input": "$15.00/1M tokens",
+        "api_cost_output": "$60.00/1M tokens"
+      },
+      {
+        "rank": 23,
+        "model_name": "Grok 3",
+        "score": 46.8,
+        "organization": "xAI",
+        "notes": "Previous generation from xAI",
+        "computational_cost": "High",
+        "api_cost_input": "$2.00/1M tokens (est.)",
+        "api_cost_output": "$8.00/1M tokens (est.)"
+      },
+      {
+        "rank": 24,
+        "model_name": "GPT-4o",
+        "score": 33.2,
+        "organization": "OpenAI",
+        "notes": "With best performing scaffold",
+        "computational_cost": "Medium",
+        "api_cost_input": "$2.50/1M tokens",
+        "api_cost_output": "$10.00/1M tokens"
+      }
+    ]
+  },
+  "swe_bench_full_ranking": {
+    "last_updated": "2025-08-07",
+    "benchmark_info": {
+      "name": "SWE-bench Full",
+      "description": "Complete dataset with 2,294 real-world GitHub issues",
+      "total_tasks": 2294
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "model_name": "Claude 3.7 Sonnet Agent",
+        "score": 33.83,
+        "organization": "Anthropic",
+        "notes": "As of April 2025",
+        "computational_cost": "Medium"
+      },
+      {
+        "rank": 2,
+        "model_name": "Top Performers (General)",
+        "score": 20.0,
+        "organization": "Various",
+        "notes": "Approximate range for leading models as of January 2025",
+        "computational_cost": "Various"
+      }
+    ]
+  },
+  "swe_bench_lite_ranking": {
+    "last_updated": "2025-08-07",
+    "benchmark_info": {
+      "name": "SWE-bench Lite",
+      "description": "Curated subset with 300 tasks for faster evaluation",
+      "total_tasks": 300
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "model_name": "Top Performers",
+        "score": 43.0,
+        "organization": "Various",
+        "notes": "As of January 2025",
+        "computational_cost": "Various"
+      }
+    ]
+  },
+  "coding_performance_metrics": {
+    "codeforces_elo": [
+      {
+        "model_name": "OpenAI o3",
+        "elo_rating": 2727,
+        "percentile": 99.9
+      },
+      {
+        "model_name": "Qwen3-235B",
+        "elo_rating": 2056,
+        "percentile": 95.0
+      },
+      {
+        "model_name": "DeepSeek R1",
+        "elo_rating": 2029,
+        "percentile": 96.3
+      }
+    ],
+    "aime_scores": [
+      {
+        "model_name": "OpenAI o3",
+        "score": 96.7,
+        "year": "2024"
+      },
+      {
+        "model_name": "Qwen3-235B",
+        "score": 85.7,
+        "year": "2024"
+      },
+      {
+        "model_name": "Qwen3-235B",
+        "score": 81.4,
+        "year": "2025"
+      }
+    ]
+  },
+  "performance_trends": {
+    "2023": {
+      "swe_bench_success_rate": 4.4,
+      "description": "Early AI coding capabilities"
+    },
+    "2024": {
+      "swe_bench_success_rate": 71.7,
+      "description": "Massive improvement in coding capabilities"
+    },
+    "2025": {
+      "swe_bench_success_rate": 72.7,
+      "description": "Claude 4 Sonnet achieves new state-of-the-art"
+    }
+  }
+}
