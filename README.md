@@ -21,11 +21,14 @@
 ## 📁 ファイル構成
 
 ```
-tmp/
-├── swe_bench_ranking.json    # 完全なランキングデータ（JSON形式）
-├── swe_bench_ranking.csv     # ランキングデータ（CSV形式）
-├── swe_rank_viewer.py        # ランキング表示ツール
-└── README.md                # このファイル
+SWE_bench_rank/
+├── README.md                   # このファイル（プロジェクト説明書）
+├── swe_bench_ranking.json      # 完全なランキングデータ（JSON形式）
+├── swe_bench_ranking.csv       # ランキングデータ（CSV形式）
+├── swe_rank_viewer.py          # インタラクティブランキング表示ツール
+├── plan/
+│   └── plan.md                # 開発計画書・進捗管理
+└── tmp/                       # 一時作業フォルダ（空）
 ```
 
 ## 🛠️ 使用方法
