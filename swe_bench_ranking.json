@@ -50,22 +50,27 @@
       {
         "rank": 5,
         "model_name": "OpenAI o3",
-        "score": 72.0,
+        "score": 71.7,
         "organization": "OpenAI",
-        "notes": "Reported but not publicly released",
+        "notes": "Released April 16, 2025. Official result 71.7% (Dec 2024 announcement). Can use tools directly in agentic approach",
         "computational_cost": "Very High",
-        "api_cost_input": "$1.00/1M tokens",
-        "api_cost_output": "$4.00/1M tokens"
+        "api_cost_input": "Not yet disclosed",
+        "api_cost_output": "Not yet disclosed",
+        "additional_results": {
+          "swe_bench_verified_69_1": "69.1% (updated measurement April 2025)",
+          "codeforces_elo": 2727,
+          "aime_2025": "88.9%"
+        }
       },
       {
         "rank": 6,
         "model_name": "OpenAI o3 (Low Compute)",
         "score": 70.3,
         "organization": "OpenAI",
-        "notes": "Lower compute version of o3",
+        "notes": "Lower compute version of o3. Historical score from Dec 2024",
         "computational_cost": "High",
-        "api_cost_input": "$1.00/1M tokens",
-        "api_cost_output": "$4.00/1M tokens"
+        "api_cost_input": "Not yet disclosed",
+        "api_cost_output": "Not yet disclosed"
       },
       {
         "rank": 7,
@@ -82,10 +87,13 @@
         "model_name": "o4-mini",
         "score": 68.1,
         "organization": "OpenAI",
-        "notes": "Fast cost-efficient reasoning model",
+        "notes": "Released April 16, 2025. Fast cost-efficient reasoning model. Can use tools directly in agentic approach",
         "computational_cost": "Low",
-        "api_cost_input": "$1.10/1M tokens",
-        "api_cost_output": "$4.40/1M tokens"
+        "api_cost_input": "Not yet disclosed",
+        "api_cost_output": "Not yet disclosed",
+        "additional_results": {
+          "aime_2025": "92.7%"
+        }
       },
       {
         "rank": 9,
@@ -286,7 +294,14 @@
       {
         "model_name": "OpenAI o3",
         "elo_rating": 2727,
-        "percentile": 99.9
+        "percentile": 99.9,
+        "notes": "International Grandmaster level, top 200 competitive coders globally"
+      },
+      {
+        "model_name": "OpenAI o1",
+        "elo_rating": 1891,
+        "percentile": "Not specified",
+        "notes": "Previous generation for comparison"
       },
       {
         "model_name": "Qwen3-235B",
@@ -302,8 +317,21 @@
     "aime_scores": [
       {
         "model_name": "OpenAI o3",
+        "score": 88.9,
+        "year": "2025",
+        "notes": "Updated score from April 2025 release"
+      },
+      {
+        "model_name": "o4-mini",
+        "score": 92.7,
+        "year": "2025",
+        "notes": "Surprisingly outperformed o3 on AIME 2025"
+      },
+      {
+        "model_name": "OpenAI o3",
         "score": 96.7,
-        "year": "2024"
+        "year": "2024",
+        "notes": "Historical score from December 2024 announcement"
       },
       {
         "model_name": "Qwen3-235B",
@@ -324,11 +352,11 @@
     },
     "2024": {
       "swe_bench_success_rate": 71.7,
-      "description": "Massive improvement in coding capabilities"
+      "description": "OpenAI o3 announcement (Dec 2024) - massive improvement in coding capabilities"
     },
     "2025": {
-      "swe_bench_success_rate": 72.7,
-      "description": "Claude 4 Sonnet achieves new state-of-the-art"
+      "swe_bench_success_rate": 74.9,
+      "description": "GPT-5 achieves new state-of-the-art (Aug 2025). o3 officially released (Apr 2025)"
     }
   }
 }
