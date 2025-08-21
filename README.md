@@ -26,9 +26,9 @@ SWE_bench_rank/
 ├── swe_bench_ranking.json      # 完全なランキングデータ（JSON形式）
 ├── swe_bench_ranking.csv       # ランキングデータ（CSV形式）
 ├── swe_rank_viewer.py          # インタラクティブランキング表示ツール
-├── plan/
-│   └── plan.md                # 開発計画書・進捗管理
-└── tmp/                       # 一時作業フォルダ（空）
+├── .gitignore                  # Git除外設定
+└── plan/
+    └── plan.md                # 開発計画書・進捗管理
 ```
 
 ## 🛠️ 使用方法
