@@ -97,21 +97,21 @@ python swe_rank_viewer.py --format json
 | 2 | GPT-5.1 | 76.3% | OpenAI | 2025年11月 | $1.25/$10.00 per 1M tokens |
 | 3 | Gemini 3 Pro | 76.2% | Google | 2025年11月 | $2.00/$12.00 per 1M tokens |
 | 4 | GPT-5 | 74.9% | OpenAI | 2025年8月 | $1.25/$10.00 per 1M tokens |
-| 5 | Grok 4 | 73.5% | xAI | 2025年7月 | $5.00/$15.00 per 1M tokens (est.) |
+| 5 | Grok 4 | 73.5% | xAI | 2025年7月 | $3.00/$15.00 per 1M tokens |
 | 6 | Claude 4 Sonnet | 72.7% | Anthropic | 2025年5月 | $3.00/$15.00 per 1M tokens |
 | 7 | Claude 4 Opus | 72.5% | Anthropic | 2025年5月 | $15.00/$75.00 per 1M tokens |
-| 8 | OpenAI o3 | 71.7% | OpenAI | 2025年4月 | 未公開 |
-| 9 | OpenAI o3 (Low Compute) | 70.3% | OpenAI | 2024年12月 | 未公開 |
+| 8 | OpenAI o3 | 71.7% | OpenAI | 2025年4月 | $0.40/$1.60 per 1M tokens |
+| 9 | OpenAI o3 (Low Compute) | 70.3% | OpenAI | 2024年12月 | $0.40/$1.60 per 1M tokens |
 | 10 | Kimi K2 (Parallel) | 71.6% | Moonshot AI | 2025年 | $0.15/$2.50 per 1M tokens |
-| 11 | o4-mini | 68.1% | OpenAI | 2025年4月 | 未公開 |
+| 11 | o4-mini | 68.1% | OpenAI | 2025年4月 | $1.10/$4.40 per 1M tokens |
 | 12 | DeepSeek V3.1 | 66.0% | DeepSeek | 2025年8月 | $0.27/$1.10 per 1M tokens |
 | 13 | DeepSeek R1 (Agentic) | 65.8% | DeepSeek | 2025年 | $0.55/$2.19 per 1M tokens |
 | 14 | Kimi K2 | 65.8% | Moonshot AI | 2025年 | $0.15/$2.50 per 1M tokens |
 | 15 | Mini-SWE-agent | 65.0% | Open Source | 2025年 | 無料/オープンソース |
-| 16 | GLM-4.5 | 64.2% | Zhipu AI | 2025年 | $2.00/$6.00 per 1M tokens (est.) |
+| 16 | GLM-4.5 | 64.2% | Zhipu AI | 2025年 | $0.60/$2.20 per 1M tokens |
 | 17 | Gemini 2.5 Flash | 63.8% | Google | 2025年 | $0.30/$2.50 per 1M tokens |
-| 18 | Gemini 2.5 Pro | 63.2% | Google | 2025年 | $5.00/$15.00 per 1M tokens (est.) |
-| 19 | Claude 3.7 Sonnet | 62.3% | Anthropic | 2025年 | $1.00/$5.00 per 1M tokens (est.) |
+| 18 | Gemini 2.5 Pro | 63.2% | Google | 2025年 | $1.25/$10.00 per 1M tokens (<200K) |
+| 19 | Claude 3.7 Sonnet | 62.3% | Anthropic | 2025年 | $3.00/$15.00 per 1M tokens |
 | 20 | GPT-OSS-120b | 62.4% | OpenAI | 2025年 | 無料/オープンソース |
 | 21 | CodeStory Midwit Agent | 62.0% | CodeStory | 2025年 | N/A |
 | 22 | GPT-4.1 | 54.6% | OpenAI | 2025年 | $5.00/$15.00 per 1M tokens (est.) |
@@ -225,6 +225,7 @@ python swe_rank_viewer.py --format json
 
 ## 🔄 更新履歴
 
+- **2025-11-23 (更新2)**: API料金情報を最新データに更新。OpenAI o3（80%値下げで$0.40/$1.60）、o4-mini（$1.10/$4.40）、Grok 4（$3.00/$15.00）、GLM-4.5（$0.60/$2.20）、Gemini 2.5 Pro（$1.25/$10.00）、Claude 3.7 Sonnet（$3.00/$15.00）の価格を更新
 - **2025-11-23**: Claude Sonnet 4.5を追加、新たな世界最高スコア（77.2%）を反映。GPT-5.1とGemini 3 Proも追加
 - **2025-08-21**: DeepSeek V3.1追加、OpenAI o3/o4-mini最新公式情報でアップデート
 - **2025-08-07**: 初版作成、最新のSWE-benchランキングを収集・整理

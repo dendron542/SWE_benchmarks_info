@@ -68,8 +68,12 @@
         "organization": "xAI",
         "notes": "Released July 2025, 256K context window",
         "computational_cost": "Very High",
-        "api_cost_input": "$5.00/1M tokens (est.)",
-        "api_cost_output": "$15.00/1M tokens (est.)"
+        "api_cost_input": "$3.00/1M tokens",
+        "api_cost_output": "$15.00/1M tokens",
+        "additional_features": {
+          "cached_tokens": "$0.75/1M tokens",
+          "live_search": "$25.00/1K sources"
+        }
       },
       {
         "rank": 6,
@@ -96,10 +100,15 @@
         "model_name": "OpenAI o3",
         "score": 71.7,
         "organization": "OpenAI",
-        "notes": "Released April 16, 2025. Official result 71.7% (Dec 2024 announcement). Can use tools directly in agentic approach",
+        "notes": "Released April 16, 2025. Official result 71.7% (Dec 2024 announcement). Can use tools directly in agentic approach. 80% price reduction",
         "computational_cost": "Very High",
-        "api_cost_input": "Not yet disclosed",
-        "api_cost_output": "Not yet disclosed",
+        "api_cost_input": "$0.40/1M tokens",
+        "api_cost_output": "$1.60/1M tokens",
+        "additional_features": {
+          "o3_flex": "$5.00/1M input, $20.00/1M output",
+          "context_window": "200K tokens",
+          "prompt_caching": "75% discount for cached tokens"
+        },
         "additional_results": {
           "swe_bench_verified_69_1": "69.1% (updated measurement April 2025)",
           "codeforces_elo": 2727,
@@ -113,8 +122,8 @@
         "organization": "OpenAI",
         "notes": "Lower compute version of o3. Historical score from Dec 2024",
         "computational_cost": "High",
-        "api_cost_input": "Not yet disclosed",
-        "api_cost_output": "Not yet disclosed"
+        "api_cost_input": "$0.40/1M tokens",
+        "api_cost_output": "$1.60/1M tokens"
       },
       {
         "rank": 10,
@@ -133,8 +142,13 @@
         "organization": "OpenAI",
         "notes": "Released April 16, 2025. Fast cost-efficient reasoning model. Can use tools directly in agentic approach",
         "computational_cost": "Low",
-        "api_cost_input": "Not yet disclosed",
-        "api_cost_output": "Not yet disclosed",
+        "api_cost_input": "$1.10/1M tokens",
+        "api_cost_output": "$4.40/1M tokens",
+        "additional_features": {
+          "context_window": "200K tokens",
+          "max_output_tokens": "100K tokens",
+          "caching_batching": "Supported"
+        },
         "additional_results": {
           "aime_2025": "92.7%"
         }
@@ -190,10 +204,14 @@
         "model_name": "GLM-4.5",
         "score": 64.2,
         "organization": "Zhipu AI",
-        "notes": "Chinese AI model",
+        "notes": "Chinese AI model, open-source 355B parameter MoE model",
         "computational_cost": "Medium",
-        "api_cost_input": "$2.00/1M tokens (est.)",
-        "api_cost_output": "$6.00/1M tokens (est.)"
+        "api_cost_input": "$0.60/1M tokens",
+        "api_cost_output": "$2.20/1M tokens",
+        "additional_features": {
+          "cached_tokens": "$0.11/1M tokens",
+          "glm_4_5_air": "$0.20/1M input, $1.10/1M output"
+        }
       },
       {
         "rank": 17,
@@ -210,18 +228,30 @@
         "model_name": "Gemini 2.5 Pro",
         "score": 63.2,
         "organization": "Google",
-        "notes": "Google's flagship model",
+        "notes": "Google's reasoning model with extended thinking capabilities",
         "computational_cost": "High",
-        "api_cost_input": "$5.00/1M tokens (est.)",
-        "api_cost_output": "$15.00/1M tokens (est.)"
+        "api_cost_input": "$1.25/1M tokens (<200K), $2.50/1M tokens (>200K)",
+        "api_cost_output": "$10.00/1M tokens (<200K), $15.00/1M tokens (>200K)",
+        "additional_features": {
+          "batch_api_input": "$0.625/1M (<200K), $1.25/1M (>200K)",
+          "batch_api_output": "$5.00/1M (<200K), $7.50/1M (>200K)",
+          "free_tier": "5 RPM, 25 requests/day"
+        }
       },
       {
         "rank": 19,
         "model_name": "Claude 3.7 Sonnet",
         "score": 62.3,
         "organization": "Anthropic",
-        "notes": "Previous generation model",
-        "computational_cost": "Medium"
+        "notes": "Previous generation model with extended thinking mode",
+        "computational_cost": "Medium",
+        "api_cost_input": "$3.00/1M tokens",
+        "api_cost_output": "$15.00/1M tokens",
+        "additional_features": {
+          "thinking_tokens": "Included in output pricing",
+          "prompt_caching": "90% discount",
+          "batch_processing": "50% discount"
+        }
       },
       {
         "rank": 20,
@@ -319,7 +349,9 @@
         "score": 33.83,
         "organization": "Anthropic",
         "notes": "As of April 2025",
-        "computational_cost": "Medium"
+        "computational_cost": "Medium",
+        "api_cost_input": "$3.00/1M tokens",
+        "api_cost_output": "$15.00/1M tokens"
       },
       {
         "rank": 2,

@@ -3,21 +3,21 @@ Claude Sonnet 4.5,77.2,SWE-bench Verified,Anthropic,1,Released September 2025 be
 GPT-5.1,76.3,SWE-bench Verified,OpenAI,2,Released November 2025 improved coding capabilities 30% fewer tokens,High,$1.25/1M tokens,$10.00/1M tokens
 Gemini 3 Pro,76.2,SWE-bench Verified,Google,3,Released November 2025 agentic coding 1M token context,High,$2.00/1M tokens (<200K) $4.00/1M tokens (>200K),$12.00/1M tokens (<200K) $18.00/1M tokens (>200K)
 GPT-5,74.9,SWE-bench Verified,OpenAI,4,Released August 2025 unified reasoning model,High,$1.25/1M tokens,$10.00/1M tokens
-Grok 4,73.5,SWE-bench Verified,xAI,5,Released July 2025 256K context window,Very High,$5.00/1M tokens (est.),$15.00/1M tokens (est.)
+Grok 4,73.5,SWE-bench Verified,xAI,5,Released July 2025 256K context window,Very High,$3.00/1M tokens,$15.00/1M tokens
 Claude 4 Sonnet,72.7,SWE-bench Verified,Anthropic,6,Released May 2025 outperforms Opus on practical coding,Medium,$3.00/1M tokens,$15.00/1M tokens
 Claude 4 Opus,72.5,SWE-bench Verified,Anthropic,7,79.4% with parallel test-time compute,High,$15.00/1M tokens,$75.00/1M tokens
-OpenAI o3,71.7,SWE-bench Verified,OpenAI,8,Released April 16 2025. Official result 71.7%. Can use tools directly,Very High,Not yet disclosed,Not yet disclosed
-OpenAI o3 (Low Compute),70.3,SWE-bench Verified,OpenAI,9,Lower compute version of o3,High,Not yet disclosed,Not yet disclosed
+OpenAI o3,71.7,SWE-bench Verified,OpenAI,8,Released April 16 2025. Official result 71.7%. 80% price reduction,Very High,$0.40/1M tokens,$1.60/1M tokens
+OpenAI o3 (Low Compute),70.3,SWE-bench Verified,OpenAI,9,Lower compute version of o3,High,$0.40/1M tokens,$1.60/1M tokens
 Kimi K2 (Parallel Test-time Compute),71.6,SWE-bench Verified,Moonshot AI,10,With parallel test-time compute sampling,High,$0.15/1M tokens,$2.50/1M tokens
-o4-mini,68.1,SWE-bench Verified,OpenAI,11,Released April 16 2025. Fast cost-efficient reasoning model. Can use tools directly,Low,Not yet disclosed,Not yet disclosed
+o4-mini,68.1,SWE-bench Verified,OpenAI,11,Released April 16 2025. Fast cost-efficient reasoning model. Can use tools directly,Low,$1.10/1M tokens,$4.40/1M tokens
 DeepSeek V3.1,66.0,SWE-bench Verified,DeepSeek,12,Released August 21 2025. Hybrid model with think/non-think modes,Medium,$0.27/1M (cache miss) $0.07/1M (cache hit),$1.10/1M tokens
 DeepSeek R1 (Agentic),65.8,SWE-bench Verified,DeepSeek,13,Open source reasoning model,Medium,$0.55/1M tokens,$2.19/1M tokens
 Kimi K2,65.8,SWE-bench Verified,Moonshot AI,14,Open-source trillion parameter MoE model single attempt,Medium,$0.15/1M tokens,$2.50/1M tokens
 Mini-SWE-agent,65.0,SWE-bench Verified,Open Source,15,Achieved with 100 lines of Python code,Low,Free/Open Source,Free/Open Source
-GLM-4.5,64.2,SWE-bench Verified,Zhipu AI,16,Chinese AI model,Medium,$2.00/1M tokens (est.),$6.00/1M tokens (est.)
+GLM-4.5,64.2,SWE-bench Verified,Zhipu AI,16,Chinese AI model open-source 355B parameter MoE,Medium,$0.60/1M tokens,$2.20/1M tokens
 Gemini 2.5 Flash,63.8,SWE-bench Verified,Google,17,Thinking model with custom agent setup,Medium,$0.30/1M tokens,$2.50/1M tokens
-Gemini 2.5 Pro,63.2,SWE-bench Verified,Google,18,Google's flagship model,High,$5.00/1M tokens (est.),$15.00/1M tokens (est.)
-Claude 3.7 Sonnet,62.3,SWE-bench Verified,Anthropic,19,Previous generation model,Medium,$1.00/1M tokens (est.),$5.00/1M tokens (est.)
+Gemini 2.5 Pro,63.2,SWE-bench Verified,Google,18,Google's reasoning model with extended thinking,High,$1.25/1M tokens (<200K) $2.50/1M tokens (>200K),$10.00/1M tokens (<200K) $15.00/1M tokens (>200K)
+Claude 3.7 Sonnet,62.3,SWE-bench Verified,Anthropic,19,Previous generation model with extended thinking,Medium,$3.00/1M tokens,$15.00/1M tokens
 GPT-OSS-120b,62.4,SWE-bench Verified,OpenAI,20,Open source competitive model,High,Free/Open Source,Free/Open Source
 CodeStory Midwit Agent + swe-search,62.0,SWE-bench Verified,CodeStory,21,Multi-agent brute force approach,Very High,N/A,N/A
 GPT-4.1,54.6,SWE-bench Verified,OpenAI,22,OpenAI's latest general purpose model,High,$5.00/1M tokens (est.),$15.00/1M tokens (est.)
@@ -29,6 +29,6 @@ Grok 3,46.8,SWE-bench Verified,xAI,27,Previous generation from xAI,High,$2.00/1M
 GPT-4o,33.2,SWE-bench Verified,OpenAI,28,With best performing scaffold,Medium,$2.50/1M tokens,$10.00/1M tokens
 GPT-5 Mini,N/A,SWE-bench Verified,OpenAI,N/A,Smaller version of GPT-5,Low,$0.50/1M tokens,$5.00/1M tokens
 GPT-5 Nano,N/A,SWE-bench Verified,OpenAI,N/A,Smallest GPT-5 variant,Very Low,$0.15/1M tokens,$1.50/1M tokens
-Claude 3.7 Sonnet Agent,33.83,SWE-bench Full,Anthropic,1,As of April 2025,Medium,$1.00/1M tokens (est.),$5.00/1M tokens (est.)
+Claude 3.7 Sonnet Agent,33.83,SWE-bench Full,Anthropic,1,As of April 2025,Medium,$3.00/1M tokens,$15.00/1M tokens
 Top Performers (General),20.0,SWE-bench Full,Various,2,Approximate range for leading models as of January 2025,Various,Various,Various
 Top Performers,43.0,SWE-bench Lite,Various,1,As of January 2025,Various,Various,Various
