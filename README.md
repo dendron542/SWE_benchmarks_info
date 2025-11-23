@@ -163,21 +163,43 @@ python swe_rank_viewer.py --format json
 
 ## 💻 追加メトリクス
 
-### Codeforces ELO ランキング
-1. **OpenAI o3**: 2,727 ELO (99.9パーセンタイル) - 国際グランドマスターレベル
-2. **Qwen3-235B**: 2,056 ELO (95.0パーセンタイル)
-3. **DeepSeek R1**: 2,029 ELO (96.3パーセンタイル)
-4. **OpenAI o1**: 1,891 ELO (前世代比較用)
+### Codeforces ELO ランキング（2025年11月最新版）
+1. **OpenAI o3**: 2,700 ELO (99.9パーセンタイル) - 国際グランドマスターレベル
+2. **Gemini 3 Pro**: 2,439 ELO (LiveCodeBench Pro, 2025年11月)
+3. **GPT-5.1**: ~2,240 ELO (LiveCodeBench, 2025年11月)
+4. **Claude Sonnet 4.5**: 2,121 ELO (Div1, 2025年9月)
+5. **DeepSeek R1**: 2,029 ELO (96.3パーセンタイル, 2025年1月)
+6. **DeepSeek R1-0528**: 1,930 ELO (2025年5月アップグレード版)
+7. **Qwen3-235B**: 2,056 ELO (95.0パーセンタイル)
+8. **OpenAI o1**: 1,891 ELO (前世代比較用)
 
-### AIME スコア
-- **o4-mini**: 92.7% (2025年) - o3を上回る驚異的スコア
+### AIME 2025 スコア（最新版）
+
+**ツール使用あり:**
+- **Claude Sonnet 4.5**: 100% (Python tools)
+- **Gemini 3 Pro**: 100% (Code execution)
+- **GPT-5.1**: 94.0%
+- **o4-mini**: 92.7% - o3を上回る驚異的スコア
 - **OpenAI o3**: 88.9% (2025年最新), 96.7% (2024年発表時)
+
+**ツールなし（数学推論のみ）:**
+- **Gemini 3 Pro**: 95.0%
+- **DeepSeek R1-0528**: 91.4% (AIME 2024)
+- **DeepSeek V3.1**: 88.4%
+- **Claude Sonnet 4.5**: 87.0%
+- **DeepSeek R1-0528**: 87.5% (AIME 2025)
 - **Qwen3-235B**: 85.7% (2024年), 81.4% (2025年)
+- **DeepSeek R1**: 79.8% (AIME 2024)
+
+### Terminal-Bench 2.0（ターミナル操作）
+1. **Gemini 3 Pro**: 54.2% - 最高スコア
+2. **Claude Sonnet 4.5**: 50.0% (Agentic Terminal Coding)
+3. **GPT-5.1**: 47.6%
 
 ### DeepSeek V3.1 その他のベンチマーク
 - **Aider**: 71.6% - 多言語プログラミングテスト
 - **SWE-bench Multilingual**: 54.5% - 多言語対応
-- **Terminal-bench**: 31.3% - ターミナル操作
+- **Terminal-bench**: 31.3% - ターミナル操作（旧版）
 
 ## ⚠️ 注意事項
 
@@ -225,6 +247,7 @@ python swe_rank_viewer.py --format json
 
 ## 🔄 更新履歴
 
+- **2025-11-23**: 追加メトリクスを大幅更新 - Codeforces ELO、AIME 2025、Terminal-Bench 2.0の最新スコアを反映。Claude Sonnet 4.5（100% AIME）、Gemini 3 Pro（2,439 ELO、100% AIME）、GPT-5.1（94.0% AIME）の最新ベンチマークを追加
 - **2025-11-23**: Claude Sonnet 4.5を追加、新たな世界最高スコア（77.2%）を反映。GPT-5.1とGemini 3 Proも追加
 - **2025-08-21**: DeepSeek V3.1追加、OpenAI o3/o4-mini最新公式情報でアップデート
 - **2025-08-07**: 初版作成、最新のSWE-benchランキングを収集・整理
