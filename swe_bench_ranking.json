@@ -1,6 +1,6 @@
 {
   "swe_bench_verified_ranking": {
-    "last_updated": "2026-01-27",
+    "last_updated": "2026-01-28",
     "benchmark_info": {
       "name": "SWE-bench Verified",
       "description": "Human-validated subset of SWE-bench with 500 tasks",
@@ -27,6 +27,9 @@
           "swe_bench_multilingual": "Leading across 7 of 8 programming languages",
           "aider_polyglot": "10.6% improvement over Sonnet 4.5",
           "vending_bench": "29% higher performance than Sonnet 4.5"
+        },
+        "additional_results": {
+          "swe_bench_pro": "45.9%"
         }
       },
       {
@@ -66,7 +69,8 @@
         "additional_results": {
           "swe_bench_verified_parallel": "82.0%",
           "agentic_terminal_coding": "50.0%",
-          "context_window": "200K+"
+          "context_window": "200K+",
+          "swe_bench_pro": "43.6%"
         }
       },
       {
@@ -118,7 +122,8 @@
         "api_cost_output": "$12.00/1M tokens (<200K), $18.00/1M tokens (>200K)",
         "additional_results": {
           "lmarena_elo": 1501,
-          "context_window": "1M tokens"
+          "context_window": "1M tokens",
+          "swe_bench_pro": "43.3%"
         }
       },
       {
@@ -129,7 +134,10 @@
         "notes": "Released August 2025, unified reasoning model",
         "computational_cost": "High",
         "api_cost_input": "$1.25/1M tokens",
-        "api_cost_output": "$10.00/1M tokens"
+        "api_cost_output": "$10.00/1M tokens",
+        "additional_results": {
+          "swe_bench_pro": "41.8%"
+        }
       },
       {
         "rank": 8,
@@ -147,7 +155,8 @@
         },
         "additional_results": {
           "swe_bench_multilingual": "72.5%",
-          "vibe_aggregate": "88.6"
+          "vibe_aggregate": "88.6",
+          "swe_bench_pro": "36.8%"
         }
       },
       {
@@ -209,7 +218,10 @@
         "notes": "Released May 2025, outperforms Opus on practical coding",
         "computational_cost": "Medium",
         "api_cost_input": "$3.00/1M tokens",
-        "api_cost_output": "$15.00/1M tokens"
+        "api_cost_output": "$15.00/1M tokens",
+        "additional_results": {
+          "swe_bench_pro": "42.7%"
+        }
       },
       {
         "rank": 13,
@@ -360,7 +372,10 @@
         "notes": "Open-source trillion parameter MoE model, single attempt",
         "computational_cost": "Medium",
         "api_cost_input": "$0.15/1M tokens",
-        "api_cost_output": "$2.50/1M tokens"
+        "api_cost_output": "$2.50/1M tokens",
+        "additional_results": {
+          "swe_bench_pro": "27.7%"
+        }
       },
       {
         "rank": 24,
@@ -551,6 +566,76 @@
         "organization": "Various",
         "notes": "As of January 2025",
         "computational_cost": "Various"
+      }
+    ]
+  },
+  "swe_bench_pro_ranking": {
+    "last_updated": "2026-01-28",
+    "benchmark_info": {
+      "name": "SWE-bench Pro",
+      "description": "Enterprise-level benchmark with 1865 tasks across 41 professional repositories",
+      "total_tasks": 1865,
+      "public_tasks": 731,
+      "contamination_resistant": true,
+      "license": "GPL and strong copyleft licenses",
+      "data_source": "https://scale.com/leaderboard/swe_bench_pro_public"
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "model_name": "GPT-5.2 Thinking",
+        "score": 55.6,
+        "organization": "OpenAI",
+        "notes": "SWE-bench Pro SOTA, December 2025"
+      },
+      {
+        "rank": 2,
+        "model_name": "Claude Opus 4.5",
+        "score": 45.9,
+        "organization": "Anthropic",
+        "notes": "November 2025"
+      },
+      {
+        "rank": 3,
+        "model_name": "Claude Sonnet 4.5",
+        "score": 43.6,
+        "organization": "Anthropic",
+        "notes": "September 2025"
+      },
+      {
+        "rank": 4,
+        "model_name": "Gemini 3 Pro",
+        "score": 43.3,
+        "organization": "Google",
+        "notes": "November 2025"
+      },
+      {
+        "rank": 5,
+        "model_name": "Claude 4 Sonnet",
+        "score": 42.7,
+        "organization": "Anthropic",
+        "notes": "May 2025"
+      },
+      {
+        "rank": 6,
+        "model_name": "GPT-5",
+        "score": 41.8,
+        "organization": "OpenAI",
+        "notes": "August 2025"
+      },
+      {
+        "rank": 7,
+        "model_name": "MiniMax M2.1",
+        "score": 36.8,
+        "organization": "MiniMax",
+        "notes": "December 2025"
+      },
+      {
+        "rank": 8,
+        "model_name": "Kimi K2",
+        "score": 27.7,
+        "organization": "Moonshot AI",
+        "notes": "2025"
       }
     ]
   },
