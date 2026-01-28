@@ -4,20 +4,22 @@
 
 このプロジェクトは、2025年11月時点でのSWE-benchベンチマークにおける各種AIモデルの最新スコアとランキングを提供します。
 
-## 🏆 トップ7モデル（SWE-bench Verified）
+## 🏆 トップ10モデル（SWE-bench Verified）
 
 1. **Claude Opus 4.5**: 80.9% （2025年11月リリース）
-2. **GPT-5.2 Thinking**: 80.0% （2025年12月リリース）🆕
+2. **GPT-5.2 Thinking**: 80.0% （2025年12月リリース）
 3. **Claude Sonnet 4.5**: 77.2% （2025年9月リリース）
-4. **GPT-5.1**: 76.3% （2025年11月リリース）
-5. **Gemini 3 Pro**: 76.2% （2025年11月リリース）
-6. **GPT-5**: 74.9% （2025年8月リリース）
-7. **MiniMax M2.1**: 74.0% （2025年12月リリース）
-8. **GLM-4.7**: 73.8% （2025年12月リリース）
+4. **Kimi K2.5**: 76.8% （2026年1月リリース）🆕
+5. **GPT-5.1**: 76.3% （2025年11月リリース）
+6. **Gemini 3 Pro**: 76.2% （2025年11月リリース）
+7. **GPT-5**: 74.9% （2025年8月リリース）
+8. **MiniMax M2.1**: 74.0% （2025年12月リリース）
+9. **GLM-4.7**: 73.8% （2025年12月リリース）
+10. **Grok 4**: 73.5% （2025年7月リリース）
 
 ### 新着のトップモデル
 
-#### GPT-5.2 Thinking #2 🆕
+#### GPT-5.2 Thinking #2
 - **80.0%** - SWE-bench Verified（2025年12月11日リリース）
 - **SWE-bench Pro SOTA** - 55.6%を達成、複数言語対応の新記録
 - **超大容量コンテキスト** - 400Kトークン（GPT-5の3倍）、128K出力上限
@@ -26,7 +28,17 @@
 - **API価格** - $1.75/1M入力、$14.00/1M出力（キャッシュ90%割引で$0.175/1M）
 - **GDPval** - 70.9%達成、専門家レベルのパフォーマンス
 
-#### MiniMax M2.1 #7 🆕
+#### Kimi K2.5 #4 🆕
+- **76.8%** - SWE-bench Verified（2026年1月リリース）
+- **最強のオープンソースマルチモーダルエージェントモデル** - Moonshot AIによる最新モデル
+- **マルチモーダル対応** - 128Kコンテキストウィンドウ
+- **エージェント機能** - 最大100エージェントのスウォーム対応
+- **SWE-bench Multilingual** - 73.0%達成
+- **Terminal-Bench 2.0** - 50.8%達成
+- **LiveCodeBench V6** - 85.0%達成
+- **API価格** - $0.60/1M入力、$2.50/1M出力
+
+#### MiniMax M2.1 #8
 - **74.0%** - SWE-bench Verified（2025年12月23日リリース）
 - **最強のオープンソースモデル** - エージェントワークロードで最高性能
 - **Sparse MoE アーキテクチャ** - 2300億パラメータ（アクティブは100億）
@@ -35,7 +47,7 @@
 - **SWE-bench Multilingual** - 72.5%達成、非Python言語（Rust、Go、Java）で競合を凌駕
 - **知識カットオフ** - 2025年12月リリース
 
-#### GLM-4.7 #8 🆕
+#### GLM-4.7 #9
 - **73.8%** - SWE-bench Verified（2025年12月22日リリース）
 - **GLM-4.6から+5.8%向上** - 前バージョンから大幅に改善
 - **LiveCodeBench V6** - 84.9達成、Claude Sonnet 4.5を超える
@@ -44,7 +56,7 @@
 - **API価格** - $0.60/1M入力、$2.20/1M出力（キャッシュ利用時$0.11/1M）
 - **オープンウェイトモデル** - Zhipu AIによる最新のコーディング・推論モデル
 
-#### MiniMax M2 #17 🆕
+#### MiniMax M2 #18
 - **69.4%** - SWE-bench Verified（2025年10月27日リリース）
 - **オープンウェイトモデル** - 2300億パラメータ（アクティブは100億）
 - **驚異的なコスト効率** - Claude 4.5 Sonnetの8%のコストで2倍の推論速度
@@ -140,41 +152,42 @@ python swe_rank_viewer.py --format json
 | ランク | モデル名 | スコア | 組織 | リリース時期 | API価格（入力/出力） |
 |--------|----------|--------|------|--------------|---------------------|
 | 1 | Claude Opus 4.5 | 80.9% | Anthropic | 2025年11月 | $5.00/$25.00 per 1M tokens |
-| 2 | GPT-5.2 Thinking 🆕 | 80.0% | OpenAI | 2025年12月 | $1.75/$14.00 per 1M tokens |
+| 2 | GPT-5.2 Thinking | 80.0% | OpenAI | 2025年12月 | $1.75/$14.00 per 1M tokens |
 | 3 | Claude Sonnet 4.5 | 77.2% | Anthropic | 2025年9月 | $3.00/$15.00 per 1M tokens |
-| 4 | GPT-5.1 | 76.3% | OpenAI | 2025年11月 | $1.25/$10.00 per 1M tokens |
-| 5 | Gemini 3 Pro | 76.2% | Google | 2025年11月 | $2.00/$12.00 per 1M tokens |
-| 6 | GPT-5 | 74.9% | OpenAI | 2025年8月 | $1.25/$10.00 per 1M tokens |
-| 7 | MiniMax M2.1 | 74.0% | MiniMax | 2025年12月 | $0.27/$1.12 per 1M tokens |
-| 8 | GLM-4.7 | 73.8% | Zhipu AI | 2025年12月 | $0.60/$2.20 per 1M tokens |
-| 9 | Grok 4 | 73.5% | xAI | 2025年7月 | $3.00/$15.00 per 1M tokens |
-| 10 | DeepSeek 3.2 Thinking | 73.1% | DeepSeek | 2025年9月 | $0.28/$0.42 per 1M tokens |
-| 11 | Claude 4 Sonnet | 72.7% | Anthropic | 2025年5月 | $3.00/$15.00 per 1M tokens |
-| 12 | Claude 4 Opus | 72.5% | Anthropic | 2025年5月 | $15.00/$75.00 per 1M tokens |
-| 13 | OpenAI o3 | 71.7% | OpenAI | 2025年4月 | $0.40/$1.60 per 1M tokens |
-| 14 | Kimi K2 (Parallel) | 71.6% | Moonshot AI | 2025年 | $0.15/$2.50 per 1M tokens |
-| 15 | Kimi K2 Thinking | 71.3% | Moonshot AI | 2025年11月 | $0.15/$2.50 per 1M tokens |
-| 16 | OpenAI o3 (Low Compute) | 70.3% | OpenAI | 2024年12月 | $0.40/$1.60 per 1M tokens |
-| 17 | MiniMax M2 | 69.4% | MiniMax | 2025年10月 | $0.30/$1.20 per 1M tokens |
-| 18 | o4-mini | 68.1% | OpenAI | 2025年4月 | $1.10/$4.40 per 1M tokens |
-| 19 | GLM-4.6 | 68.0% | Zhipu AI | 2025年9月 | $0.60/$2.20 per 1M tokens |
-| 20 | DeepSeek V3.1 | 66.0% | DeepSeek | 2025年8月 | $0.27/$1.10 per 1M tokens |
-| 21 | DeepSeek R1 (Agentic) | 65.8% | DeepSeek | 2025年 | $0.55/$2.19 per 1M tokens |
-| 22 | Kimi K2 | 65.8% | Moonshot AI | 2025年 | $0.15/$2.50 per 1M tokens |
-| 23 | Mini-SWE-agent | 65.0% | Open Source | 2025年 | 無料/オープンソース |
-| 24 | GLM-4.5 | 64.2% | Zhipu AI | 2025年 | $0.60/$2.20 per 1M tokens |
-| 25 | Gemini 2.5 Flash | 63.8% | Google | 2025年 | $0.30/$2.50 per 1M tokens |
-| 26 | Gemini 2.5 Pro | 63.2% | Google | 2025年 | $1.25/$10.00 per 1M tokens (<200K) |
-| 27 | Claude 3.7 Sonnet | 62.3% | Anthropic | 2025年 | $3.00/$15.00 per 1M tokens |
-| 28 | GPT-OSS-120b | 62.4% | OpenAI | 2025年 | 無料/オープンソース |
-| 29 | CodeStory Midwit Agent | 62.0% | CodeStory | 2025年 | N/A |
-| 30 | GPT-4.1 | 54.6% | OpenAI | 2025年 | $5.00/$15.00 per 1M tokens (est.) |
-| 31 | Claude 3.5 Sonnet (Latest) | 50.8% | Anthropic | 2024年 | $3.00/$15.00 per 1M tokens |
-| 32 | DeepSeek R1 | 49.2% | DeepSeek | 2025年 | $0.55/$2.19 per 1M tokens |
-| 33 | Claude 3.5 Sonnet (Upgraded) | 49.0% | Anthropic | 2024年 | $3.00/$15.00 per 1M tokens |
-| 34 | OpenAI o1 | 48.9% | OpenAI | 2024年 | $15.00/$60.00 per 1M tokens |
-| 35 | Grok 3 | 46.8% | xAI | 2025年 | $2.00/$8.00 per 1M tokens (est.) |
-| 36 | GPT-4o | 33.2% | OpenAI | 2024年 | $2.50/$10.00 per 1M tokens |
+| 4 | Kimi K2.5 🆕 | 76.8% | Moonshot AI | 2026年1月 | $0.60/$2.50 per 1M tokens |
+| 5 | GPT-5.1 | 76.3% | OpenAI | 2025年11月 | $1.25/$10.00 per 1M tokens |
+| 6 | Gemini 3 Pro | 76.2% | Google | 2025年11月 | $2.00/$12.00 per 1M tokens |
+| 7 | GPT-5 | 74.9% | OpenAI | 2025年8月 | $1.25/$10.00 per 1M tokens |
+| 8 | MiniMax M2.1 | 74.0% | MiniMax | 2025年12月 | $0.27/$1.12 per 1M tokens |
+| 9 | GLM-4.7 | 73.8% | Zhipu AI | 2025年12月 | $0.60/$2.20 per 1M tokens |
+| 10 | Grok 4 | 73.5% | xAI | 2025年7月 | $3.00/$15.00 per 1M tokens |
+| 11 | DeepSeek 3.2 Thinking | 73.1% | DeepSeek | 2025年9月 | $0.28/$0.42 per 1M tokens |
+| 12 | Claude 4 Sonnet | 72.7% | Anthropic | 2025年5月 | $3.00/$15.00 per 1M tokens |
+| 13 | Claude 4 Opus | 72.5% | Anthropic | 2025年5月 | $15.00/$75.00 per 1M tokens |
+| 14 | OpenAI o3 | 71.7% | OpenAI | 2025年4月 | $0.40/$1.60 per 1M tokens |
+| 15 | Kimi K2 (Parallel) | 71.6% | Moonshot AI | 2025年 | $0.15/$2.50 per 1M tokens |
+| 16 | Kimi K2 Thinking | 71.3% | Moonshot AI | 2025年11月 | $0.15/$2.50 per 1M tokens |
+| 17 | OpenAI o3 (Low Compute) | 70.3% | OpenAI | 2024年12月 | $0.40/$1.60 per 1M tokens |
+| 18 | MiniMax M2 | 69.4% | MiniMax | 2025年10月 | $0.30/$1.20 per 1M tokens |
+| 19 | o4-mini | 68.1% | OpenAI | 2025年4月 | $1.10/$4.40 per 1M tokens |
+| 20 | GLM-4.6 | 68.0% | Zhipu AI | 2025年9月 | $0.60/$2.20 per 1M tokens |
+| 21 | DeepSeek V3.1 | 66.0% | DeepSeek | 2025年8月 | $0.27/$1.10 per 1M tokens |
+| 22 | DeepSeek R1 (Agentic) | 65.8% | DeepSeek | 2025年 | $0.55/$2.19 per 1M tokens |
+| 23 | Kimi K2 | 65.8% | Moonshot AI | 2025年 | $0.15/$2.50 per 1M tokens |
+| 24 | Mini-SWE-agent | 65.0% | Open Source | 2025年 | 無料/オープンソース |
+| 25 | GLM-4.5 | 64.2% | Zhipu AI | 2025年 | $0.60/$2.20 per 1M tokens |
+| 26 | Gemini 2.5 Flash | 63.8% | Google | 2025年 | $0.30/$2.50 per 1M tokens |
+| 27 | Gemini 2.5 Pro | 63.2% | Google | 2025年 | $1.25/$10.00 per 1M tokens (<200K) |
+| 28 | Claude 3.7 Sonnet | 62.3% | Anthropic | 2025年 | $3.00/$15.00 per 1M tokens |
+| 29 | GPT-OSS-120b | 62.4% | OpenAI | 2025年 | 無料/オープンソース |
+| 30 | CodeStory Midwit Agent | 62.0% | CodeStory | 2025年 | N/A |
+| 31 | GPT-4.1 | 54.6% | OpenAI | 2025年 | $5.00/$15.00 per 1M tokens (est.) |
+| 32 | Claude 3.5 Sonnet (Latest) | 50.8% | Anthropic | 2024年 | $3.00/$15.00 per 1M tokens |
+| 33 | DeepSeek R1 | 49.2% | DeepSeek | 2025年 | $0.55/$2.19 per 1M tokens |
+| 34 | Claude 3.5 Sonnet (Upgraded) | 49.0% | Anthropic | 2024年 | $3.00/$15.00 per 1M tokens |
+| 35 | OpenAI o1 | 48.9% | OpenAI | 2024年 | $15.00/$60.00 per 1M tokens |
+| 36 | Grok 3 | 46.8% | xAI | 2025年 | $2.00/$8.00 per 1M tokens (est.) |
+| 37 | GPT-4o | 33.2% | OpenAI | 2024年 | $2.50/$10.00 per 1M tokens |
 
 ### 主要モデルの詳細情報
 
@@ -304,6 +317,7 @@ python swe_rank_viewer.py --format json
 
 ## 🔄 更新履歴
 
+- **2026-01-28**: Kimi K2.5（76.8%）をREADMEに追加。4位にランクイン、オープンソースマルチモーダルエージェントモデル
 - **2026-01-24**: GPT-5.2 Thinking（80.0%）を追加。SWE-bench Pro 55.6%で新記録達成、400Kコンテキストウィンドウ、ARC-AGI 91.4%
 - **2026-01-23**: GLM-4.7（73.8%）、MiniMax M2.1（74.0%）、MiniMax M2（69.4%）を追加。最新のオープンソース/オープンウェイトモデルのベンチマークを反映
 - **2025-11-25**: Claude Opus 4.5を追加（80.9%）、SWE-bench Verified初の80%超えを達成。全ランキングを更新
