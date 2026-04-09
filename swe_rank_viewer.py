@@ -83,7 +83,8 @@ def display_coding_metrics(metrics_data: Dict[str, Any]) -> None:
     for item in metrics_data.get("codeforces_elo", []):
         model = item["model_name"]
         elo = item["elo_rating"]
-        percentile = f"{item['percentile']:.1f}%"
+        raw_pct = item["percentile"]
+        percentile = f"{raw_pct:.1f}%" if isinstance(raw_pct, (int, float)) else str(raw_pct)
         print(f"{model:<25} {elo:<6} {percentile:<10}")
 
     # AIME Scores
@@ -98,45 +99,27 @@ def display_coding_metrics(metrics_data: Dict[str, Any]) -> None:
         print(f"{model:<25} {score:<8} {year:<6}")
 
 
-def display_top_models_summary() -> None:
+def display_top_models_summary(ranking_data: List[Dict[str, Any]]) -> None:
     """トップモデルの簡潔なサマリーを表示"""
     print(f"\n{'=' * 100}")
-    print("[TOP3] 2025年 SWE-bench 最優秀モデル（トップ3）- APIコスト比較")
+    print("[TOP3] SWE-bench Verified 最優秀モデル（トップ3）- APIコスト比較")
     print(f"{'=' * 100}")
 
-    top_models = [
-        {
-            "name": "Claude 4 Sonnet",
-            "score": 72.7,
-            "input_cost": "$3.00",
-            "output_cost": "$15.00",
-            "status": "2025年5月リリース",
-        },
-        {
-            "name": "Claude 4 Opus",
-            "score": 72.5,
-            "input_cost": "$15.00",
-            "output_cost": "$75.00",
-            "status": "高計算時79.4%",
-        },
-        {
-            "name": "OpenAI o3",
-            "score": 72.0,
-            "input_cost": "$1.00",
-            "output_cost": "$4.00",
-            "status": "未公開",
-        },
-    ]
+    top_models = sorted(ranking_data, key=lambda x: x.get("score", 0), reverse=True)[:3]
 
     print(
-        f"{'順位':<4} {'モデル名':<20} {'スコア':<8} {'入力コスト/1M':<12} {'出力コスト/1M':<12} {'ステータス':<20}"
+        f"{'順位':<4} {'モデル名':<25} {'スコア':<8} {'入力コスト/1M':<15} {'出力コスト/1M':<15} {'組織':<15}"
     )
-    print(f"{'-' * 4} {'-' * 20} {'-' * 8} {'-' * 12} {'-' * 12} {'-' * 20}")
+    print(f"{'-' * 4} {'-' * 25} {'-' * 8} {'-' * 15} {'-' * 15} {'-' * 15}")
 
-    for i, model in enumerate(top_models, 1):
-        print(
-            f"{i:<4} {model['name']:<20} {model['score']:.1f}%{'':<3} {model['input_cost']:<12} {model['output_cost']:<12} {model['status']:<20}"
-        )
+    for model in top_models:
+        rank = str(model.get("rank", "N/A"))
+        name = model.get("model_name", "N/A")[:24]
+        score = f"{model.get('score', 0):.1f}%"
+        input_cost = model.get("api_cost_input", "N/A")[:14]
+        output_cost = model.get("api_cost_output", "N/A")[:14]
+        org = model.get("organization", "N/A")[:14]
+        print(f"{rank:<4} {name:<25} {score:<8} {input_cost:<15} {output_cost:<15} {org:<15}")
 
 
 def main():
@@ -149,7 +132,7 @@ def main():
     )
     parser.add_argument(
         "--benchmark",
-        choices=["verified", "full", "lite", "all"],
+        choices=["verified", "full", "lite", "pro", "all"],
         default="verified",
         help="ベンチマークタイプ",
     )
@@ -157,27 +140,32 @@ def main():
     args = parser.parse_args()
 
     # データファイルのパス
-    json_path = Path(__file__).parent / "swe_bench_ranking.json"
+    json_path = str(Path(__file__).parent / "swe_bench_ranking.json")
 
     try:
         data = load_json_data(json_path)
 
         if args.format == "summary":
-            display_top_models_summary()
+            verified_ranking = data["swe_bench_verified_ranking"]["ranking"]
+            display_top_models_summary(verified_ranking)
             display_performance_trends(data["performance_trends"])
 
         elif args.format == "full":
-            if args.benchmark == "verified" or args.benchmark == "all":
+            if args.benchmark in ("verified", "all"):
                 verified_data = data["swe_bench_verified_ranking"]
                 display_ranking_table(verified_data["ranking"], "SWE-bench Verified")
 
-            if args.benchmark == "full" or args.benchmark == "all":
+            if args.benchmark in ("full", "all"):
                 full_data = data["swe_bench_full_ranking"]
                 display_ranking_table(full_data["ranking"], "SWE-bench Full")
 
-            if args.benchmark == "lite" or args.benchmark == "all":
+            if args.benchmark in ("lite", "all"):
                 lite_data = data["swe_bench_lite_ranking"]
                 display_ranking_table(lite_data["ranking"], "SWE-bench Lite")
+
+            if args.benchmark in ("pro", "all"):
+                pro_data = data["swe_bench_pro_ranking"]
+                display_ranking_table(pro_data["ranking"], "SWE-bench Pro")
 
             display_coding_metrics(data["coding_performance_metrics"])
             display_performance_trends(data["performance_trends"])

@@ -44,9 +44,6 @@ Claude 3.5 Sonnet (Upgraded),49.0,SWE-bench Verified,Anthropic,42,Previous state
 OpenAI o1,48.9,SWE-bench Verified,OpenAI,43,First reasoning model,High,$15.00/1M tokens,$60.00/1M tokens
 Grok 3,46.8,SWE-bench Verified,xAI,44,Previous generation from xAI,High,$2.00/1M tokens (est.),$8.00/1M tokens (est.)
 GPT-4o,33.2,SWE-bench Verified,OpenAI,45,With best performing scaffold,Medium,$2.50/1M tokens,$10.00/1M tokens
-GPT-5.3 Codex,N/A,SWE-bench Verified,OpenAI,N/A,Released February 5 2026 SWE-bench Pro 56.8% Terminal-Bench 2.0 77.3% OSWorld 64.7% agentic coding model,Very High,N/A (not yet announced),N/A (not yet announced)
-GPT-5 Mini,N/A,SWE-bench Verified,OpenAI,N/A,Smaller version of GPT-5,Low,$0.50/1M tokens,$5.00/1M tokens
-GPT-5 Nano,N/A,SWE-bench Verified,OpenAI,N/A,Smallest GPT-5 variant,Very Low,$0.15/1M tokens,$1.50/1M tokens
 Claude 3.7 Sonnet Agent,33.83,SWE-bench Full,Anthropic,1,As of April 2025,Medium,$3.00/1M tokens,$15.00/1M tokens
 Top Performers (General),20.0,SWE-bench Full,Various,2,Approximate range for leading models as of January 2025,Various,Various,Various
 Top Performers,43.0,SWE-bench Lite,Various,1,As of January 2025,Various,Various,Various
