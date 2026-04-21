@@ -1,6 +1,6 @@
 {
   "swe_bench_verified_ranking": {
-    "last_updated": "2026-04-12",
+    "last_updated": "2026-04-21",
     "benchmark_info": {
       "name": "SWE-bench Verified",
       "description": "Human-validated subset of SWE-bench with 500 tasks",
@@ -105,6 +105,30 @@
       },
       {
         "rank": 5,
+        "model_name": "Kimi K2.6",
+        "score": 80.2,
+        "organization": "Moonshot AI",
+        "notes": "Released April 20, 2026, open-weight frontier model with ~1T total parameters (32B active), new SWE-bench Pro SOTA at 58.6%",
+        "computational_cost": "Medium",
+        "api_cost_input": "$0.60/1M tokens",
+        "api_cost_output": "$2.50/1M tokens",
+        "additional_features": {
+          "context_window": "256K tokens",
+          "architecture": "Sparse MoE (~1T total, ~32B active)",
+          "multimodal": true,
+          "vision_encoder": "MoonViT",
+          "open_weight": true,
+          "agentic_capabilities": "Multi-agent swarm support"
+        },
+        "additional_results": {
+          "swe_bench_pro": "58.6% (new SOTA)",
+          "swe_bench_multilingual": "76.7%",
+          "terminal_bench_2_0": "66.7%",
+          "livecodebench_v6": "89.6%"
+        }
+      },
+      {
+        "rank": 6,
         "model_name": "GPT-5.2 Thinking",
         "score": 80.0,
         "organization": "OpenAI",
@@ -129,7 +153,7 @@
         }
       },
       {
-        "rank": 6,
+        "rank": 7,
         "model_name": "Claude Sonnet 4.6",
         "score": 79.0,
         "organization": "Anthropic",
@@ -147,7 +171,7 @@
         }
       },
       {
-        "rank": 7,
+        "rank": 8,
         "model_name": "Qwen 3.6 Plus",
         "score": 78.8,
         "organization": "Alibaba (Qwen)",
@@ -171,7 +195,7 @@
         }
       },
       {
-        "rank": 8,
+        "rank": 9,
         "model_name": "GLM-5.1",
         "score": 78.5,
         "organization": "Zhipu AI (Z.AI)",
@@ -196,7 +220,7 @@
         }
       },
       {
-        "rank": 9,
+        "rank": 10,
         "model_name": "MiniMax M2.7",
         "score": 78.0,
         "organization": "MiniMax",
@@ -223,7 +247,7 @@
         }
       },
       {
-        "rank": 10,
+        "rank": 11,
         "model_name": "GLM-5",
         "score": 77.8,
         "organization": "Zhipu AI (Z.AI)",
@@ -248,7 +272,7 @@
         }
       },
       {
-        "rank": 11,
+        "rank": 12,
         "model_name": "Claude Sonnet 4.5",
         "score": 77.2,
         "organization": "Anthropic",
@@ -264,7 +288,7 @@
         }
       },
       {
-        "rank": 12,
+        "rank": 13,
         "model_name": "Kimi K2.5",
         "score": 76.8,
         "organization": "Moonshot AI",
@@ -284,7 +308,7 @@
         }
       },
       {
-        "rank": 13,
+        "rank": 14,
         "model_name": "GPT-5.1",
         "score": 76.3,
         "organization": "OpenAI",
@@ -302,7 +326,7 @@
         }
       },
       {
-        "rank": 14,
+        "rank": 15,
         "model_name": "Gemini 3 Pro",
         "score": 76.2,
         "organization": "Google",
@@ -317,7 +341,7 @@
         }
       },
       {
-        "rank": 15,
+        "rank": 16,
         "model_name": "GPT-5",
         "score": 74.9,
         "organization": "OpenAI",
@@ -330,7 +354,7 @@
         }
       },
       {
-        "rank": 16,
+        "rank": 17,
         "model_name": "Qwen 3.6",
         "score": 74.2,
         "organization": "Alibaba (Qwen)",
@@ -340,7 +364,7 @@
         "api_cost_output": "$0.60/1M tokens (est.)"
       },
       {
-        "rank": 17,
+        "rank": 18,
         "model_name": "MiniMax M2.1",
         "score": 74.0,
         "organization": "MiniMax",
@@ -360,7 +384,7 @@
         }
       },
       {
-        "rank": 18,
+        "rank": 19,
         "model_name": "GLM-4.7",
         "score": 73.8,
         "organization": "Zhipu AI",
@@ -379,7 +403,7 @@
         }
       },
       {
-        "rank": 19,
+        "rank": 20,
         "model_name": "Grok 4",
         "score": 73.5,
         "organization": "xAI",
@@ -393,7 +417,7 @@
         }
       },
       {
-        "rank": 20,
+        "rank": 21,
         "model_name": "DeepSeek 3.2 Thinking",
         "score": 73.1,
         "organization": "DeepSeek",
@@ -411,7 +435,7 @@
         }
       },
       {
-        "rank": 21,
+        "rank": 22,
         "model_name": "Claude 4 Sonnet",
         "score": 72.7,
         "organization": "Anthropic",
@@ -424,7 +448,7 @@
         }
       },
       {
-        "rank": 22,
+        "rank": 23,
         "model_name": "Claude 4 Opus",
         "score": 72.5,
         "organization": "Anthropic",
@@ -434,7 +458,7 @@
         "api_cost_output": "$75.00/1M tokens"
       },
       {
-        "rank": 23,
+        "rank": 24,
         "model_name": "OpenAI o3",
         "score": 71.7,
         "organization": "OpenAI",
@@ -454,7 +478,7 @@
         }
       },
       {
-        "rank": 24,
+        "rank": 25,
         "model_name": "Kimi K2 (Parallel Test-time Compute)",
         "score": 71.6,
         "organization": "Moonshot AI",
@@ -464,7 +488,7 @@
         "api_cost_output": "$2.50/1M tokens"
       },
       {
-        "rank": 25,
+        "rank": 26,
         "model_name": "Kimi K2 Thinking",
         "score": 71.3,
         "organization": "Moonshot AI",
@@ -479,7 +503,7 @@
         }
       },
       {
-        "rank": 26,
+        "rank": 27,
         "model_name": "OpenAI o3 (Low Compute)",
         "score": 70.3,
         "organization": "OpenAI",
@@ -489,7 +513,7 @@
         "api_cost_output": "$1.60/1M tokens"
       },
       {
-        "rank": 27,
+        "rank": 28,
         "model_name": "MiniMax M2",
         "score": 69.4,
         "organization": "MiniMax",
@@ -507,7 +531,7 @@
         }
       },
       {
-        "rank": 28,
+        "rank": 29,
         "model_name": "o4-mini",
         "score": 68.1,
         "organization": "OpenAI",
@@ -525,7 +549,7 @@
         }
       },
       {
-        "rank": 29,
+        "rank": 30,
         "model_name": "GLM-4.6",
         "score": 68.0,
         "organization": "Zhipu AI",
@@ -539,7 +563,7 @@
         }
       },
       {
-        "rank": 30,
+        "rank": 31,
         "model_name": "DeepSeek V3.1",
         "score": 66.0,
         "organization": "DeepSeek",
@@ -555,7 +579,7 @@
         }
       },
       {
-        "rank": 31,
+        "rank": 32,
         "model_name": "DeepSeek R1 (Agentic)",
         "score": 65.8,
         "organization": "DeepSeek",
@@ -565,7 +589,7 @@
         "api_cost_output": "$2.19/1M tokens"
       },
       {
-        "rank": 32,
+        "rank": 33,
         "model_name": "Kimi K2",
         "score": 65.8,
         "organization": "Moonshot AI",
@@ -578,7 +602,7 @@
         }
       },
       {
-        "rank": 33,
+        "rank": 34,
         "model_name": "Mini-SWE-agent",
         "score": 65.0,
         "organization": "Open Source",
@@ -588,7 +612,7 @@
         "api_cost_output": "Free/Open Source"
       },
       {
-        "rank": 34,
+        "rank": 35,
         "model_name": "GLM-4.5",
         "score": 64.2,
         "organization": "Zhipu AI",
@@ -602,7 +626,7 @@
         }
       },
       {
-        "rank": 35,
+        "rank": 36,
         "model_name": "Gemini 2.5 Flash",
         "score": 63.8,
         "organization": "Google",
@@ -612,7 +636,7 @@
         "api_cost_output": "$2.50/1M tokens"
       },
       {
-        "rank": 36,
+        "rank": 37,
         "model_name": "Gemini 2.5 Pro",
         "score": 63.2,
         "organization": "Google",
@@ -627,7 +651,7 @@
         }
       },
       {
-        "rank": 37,
+        "rank": 38,
         "model_name": "GPT-OSS-120b",
         "score": 62.4,
         "organization": "OpenAI",
@@ -635,7 +659,7 @@
         "computational_cost": "High"
       },
       {
-        "rank": 38,
+        "rank": 39,
         "model_name": "Claude 3.7 Sonnet",
         "score": 62.3,
         "organization": "Anthropic",
@@ -650,7 +674,7 @@
         }
       },
       {
-        "rank": 39,
+        "rank": 40,
         "model_name": "CodeStory Midwit Agent + swe-search",
         "score": 62.0,
         "organization": "CodeStory",
@@ -658,7 +682,7 @@
         "computational_cost": "Very High"
       },
       {
-        "rank": 40,
+        "rank": 41,
         "model_name": "GPT-4.1",
         "score": 54.6,
         "organization": "OpenAI",
@@ -666,7 +690,7 @@
         "computational_cost": "High"
       },
       {
-        "rank": 41,
+        "rank": 42,
         "model_name": "Claude 3.5 Sonnet (Latest)",
         "score": 50.8,
         "organization": "Anthropic",
@@ -674,7 +698,7 @@
         "computational_cost": "Medium"
       },
       {
-        "rank": 42,
+        "rank": 43,
         "model_name": "DeepSeek R1",
         "score": 49.2,
         "organization": "DeepSeek",
@@ -684,7 +708,7 @@
         "api_cost_output": "$2.19/1M tokens"
       },
       {
-        "rank": 43,
+        "rank": 44,
         "model_name": "Claude 3.5 Sonnet (Upgraded)",
         "score": 49.0,
         "organization": "Anthropic",
@@ -692,7 +716,7 @@
         "computational_cost": "Medium"
       },
       {
-        "rank": 44,
+        "rank": 45,
         "model_name": "OpenAI o1",
         "score": 48.9,
         "organization": "OpenAI",
@@ -702,7 +726,7 @@
         "api_cost_output": "$60.00/1M tokens"
       },
       {
-        "rank": 45,
+        "rank": 46,
         "model_name": "Grok 3",
         "score": 46.8,
         "organization": "xAI",
@@ -712,7 +736,7 @@
         "api_cost_output": "$8.00/1M tokens (est.)"
       },
       {
-        "rank": 46,
+        "rank": 47,
         "model_name": "GPT-4o",
         "score": 33.2,
         "organization": "OpenAI",
@@ -783,83 +807,90 @@
     "ranking": [
       {
         "rank": 1,
-        "model_name": "GPT-5.3 Codex",
-        "score": 56.8,
-        "organization": "OpenAI",
-        "notes": "SWE-bench Pro new SOTA, February 2026, combines GPT-5.2 and GPT-5.2-Codex capabilities"
+        "model_name": "Kimi K2.6",
+        "score": 58.6,
+        "organization": "Moonshot AI",
+        "notes": "SWE-bench Pro new SOTA, April 20 2026, open-weight 1T MoE model"
       },
       {
         "rank": 2,
-        "model_name": "Qwen 3.6 Plus",
-        "score": 56.6,
-        "organization": "Alibaba (Qwen)",
-        "notes": "Released April 2, 2026, second highest SWE-bench Pro score"
+        "model_name": "GPT-5.3 Codex",
+        "score": 56.8,
+        "organization": "OpenAI",
+        "notes": "Previous SWE-bench Pro SOTA, February 2026, combines GPT-5.2 and GPT-5.2-Codex capabilities"
       },
       {
         "rank": 3,
+        "model_name": "Qwen 3.6 Plus",
+        "score": 56.6,
+        "organization": "Alibaba (Qwen)",
+        "notes": "Released April 2, 2026, third highest SWE-bench Pro score"
+      },
+      {
+        "rank": 4,
         "model_name": "GPT-5.2 Thinking",
         "score": 55.6,
         "organization": "OpenAI",
         "notes": "Previous SWE-bench Pro SOTA, December 2025"
       },
       {
-        "rank": 4,
+        "rank": 5,
         "model_name": "MiniMax M2.5",
         "score": 55.4,
         "organization": "MiniMax",
         "notes": "February 2026"
       },
       {
-        "rank": 5,
+        "rank": 6,
         "model_name": "Gemini 3.1 Pro",
         "score": 54.2,
         "organization": "Google",
         "notes": "February 2026"
       },
       {
-        "rank": 6,
+        "rank": 7,
         "model_name": "Claude Opus 4.5",
         "score": 45.9,
         "organization": "Anthropic",
         "notes": "November 2025"
       },
       {
-        "rank": 7,
+        "rank": 8,
         "model_name": "Claude Sonnet 4.5",
         "score": 43.6,
         "organization": "Anthropic",
         "notes": "September 2025"
       },
       {
-        "rank": 8,
+        "rank": 9,
         "model_name": "Gemini 3 Pro",
         "score": 43.3,
         "organization": "Google",
         "notes": "November 2025"
       },
       {
-        "rank": 9,
+        "rank": 10,
         "model_name": "Claude 4 Sonnet",
         "score": 42.7,
         "organization": "Anthropic",
         "notes": "May 2025"
       },
       {
-        "rank": 10,
+        "rank": 12,
         "model_name": "GPT-5",
         "score": 41.8,
         "organization": "OpenAI",
         "notes": "August 2025"
       },
       {
-        "rank": 11,
+        "rank": 13,
         "model_name": "MiniMax M2.1",
         "score": 36.8,
         "organization": "MiniMax",
         "notes": "December 2025"
       },
       {
-        "rank": 12,
+        "rank": 14,
         "model_name": "Kimi K2",
         "score": 27.7,
         "organization": "Moonshot AI",
@@ -938,7 +969,7 @@
     },
     "2026": {
       "swe_bench_success_rate": 80.8,
-      "description": "Claude Opus 4.6 (80.8%, Feb 2026) with ARC-AGI-2 68.8%. MiniMax M2.5 achieves 80.2% as top-3 model with 1/20th cost of competitors (Feb 2026). GLM-5 achieves 77.8% as strongest open-source model (Feb 2026). GPT-5.3 Codex dominates Terminal-Bench 2.0 at 77.3% and SWE-bench Pro at 56.8% (Feb 2026)"
+      "description": "Claude Opus 4.6 (80.8%, Feb 2026) with ARC-AGI-2 68.8%. MiniMax M2.5 achieves 80.2% as top-3 model with 1/20th cost of competitors (Feb 2026). GLM-5 achieves 77.8% as strongest open-source model (Feb 2026). GPT-5.3 Codex dominates Terminal-Bench 2.0 at 77.3% and SWE-bench Pro at 56.8% (Feb 2026). Kimi K2.6 achieves 80.2% as open-weight model and new SWE-bench Pro SOTA at 58.6% (Apr 2026)"
     }
   }
 }
