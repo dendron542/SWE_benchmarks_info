@@ -107,7 +107,7 @@ HTML_TEMPLATE = """\
   }}
 
   .table-wrap {{ overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }}
-  table {{ width: 100%; border-collapse: collapse; font-size: .82rem; }}
+  table {{ width: 100%; border-collapse: collapse; font-size: .82rem; table-layout: fixed; }}
   thead tr {{ background: var(--surface2); }}
   th {{
     padding: 10px 14px;
@@ -135,9 +135,13 @@ HTML_TEMPLATE = """\
   .rank-cell.silver {{ color: #C0C0C0; }}
   .rank-cell.bronze {{ color: #CD7F32; }}
 
-  .model-cell {{ font-weight: 600; max-width: 240px; }}
+  .model-cell {{ font-weight: 600; width: 260px; max-width: 260px; overflow: hidden; }}
   .model-name {{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }}
-  .model-meta {{ font-size: .72rem; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+  .model-meta {{
+    font-size: .72rem; color: var(--text-muted); margin-top: 3px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; line-height: 1.4;
+  }}
 
   .score-cell {{ min-width: 120px; }}
   .score-val {{ font-weight: 700; font-size: .95rem; }}
@@ -154,15 +158,14 @@ HTML_TEMPLATE = """\
     background: rgba(255,255,255,.08);
   }}
 
-  .cost-cell {{ font-size: .76rem; color: var(--text-muted); min-width: 130px; }}
-  .cost-cell span {{ display: block; }}
+  .cost-cell {{ font-size: .76rem; color: var(--text-muted); overflow: hidden; }}
+  .cost-cell span {{ display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
 
   .notes-cell {{
-    max-width: 260px;
     font-size: .76rem;
     color: var(--text-muted);
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }}
 
@@ -327,6 +330,14 @@ function buildRankingTable(panelId, rankingData, benchmarkName) {{
     </div>
     <div class="table-wrap">
       <table>
+        <colgroup>
+          <col style="width:48px">
+          <col style="width:260px">
+          <col style="width:130px">
+          <col style="width:150px">
+          <col style="width:200px">
+          <col style="width:110px">
+        </colgroup>
         <thead>
           <tr>
             <th data-col="rank">順位<span class="sort-icon"></span></th>
