@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWE-bench Ranking</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222536;
+    --border: #2d3148;
+    --text: #e2e8f0;
+    --text-muted: #8892b0;
+    --accent: #6366f1;
+    --accent-dim: rgba(99,102,241,.15);
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --radius: 10px;
+    --font: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header {
+    padding: 32px 24px 0;
+    text-align: center;
+  }
+  header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.03em; }
+  header p { color: var(--text-muted); margin-top: 6px; font-size: .9rem; }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding: 24px 24px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tab-btn {
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 500;
+    transition: all .2s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .panel { display: none; padding: 24px; max-width: 1300px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-box {
+    padding: 8px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: .85rem;
+    width: 220px;
+    outline: none;
+  }
+  .search-box:focus { border-color: var(--accent); }
+  .count-badge {
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  thead tr { background: var(--surface2); }
+  th {
+    padding: 10px 14px;
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+  }
+  th:hover { color: var(--text); }
+  th .sort-icon { opacity: .4; margin-left: 4px; font-size: .65rem; }
+  th.sort-asc .sort-icon::after { content: "▲"; opacity: 1; }
+  th.sort-desc .sort-icon::after { content: "▼"; opacity: 1; }
+
+  tbody tr { border-top: 1px solid var(--border); transition: background .15s; }
+  tbody tr:hover { background: var(--surface2); }
+  td { padding: 10px 14px; vertical-align: middle; }
+
+  .rank-cell { font-weight: 700; color: var(--text-muted); width: 42px; text-align: center; }
+  .rank-cell.gold   { color: #FFD700; }
+  .rank-cell.silver { color: #C0C0C0; }
+  .rank-cell.bronze { color: #CD7F32; }
+
+  .model-cell { font-weight: 600; max-width: 240px; }
+  .model-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .model-meta { font-size: .72rem; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .score-cell { min-width: 120px; }
+  .score-val { font-weight: 700; font-size: .95rem; }
+  .score-bar-wrap { margin-top: 4px; height: 4px; background: var(--border); border-radius: 2px; }
+  .score-bar { height: 100%; border-radius: 2px; }
+
+  .org-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: .72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    background: rgba(255,255,255,.08);
+  }
+
+  .cost-cell { font-size: .76rem; color: var(--text-muted); min-width: 130px; }
+  .cost-cell span { display: block; }
+
+  .notes-cell {
+    max-width: 260px;
+    font-size: .76rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Trends tab */
+  .trend-grid, .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .card-title { font-size: .78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+  .card-value { font-size: 2rem; font-weight: 700; color: var(--accent); }
+  .card-sub { font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-heading::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-muted);
+    font-size: .78rem;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.4rem; }
+    .cost-cell, .notes-cell { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SWE-bench Ranking</h1>
+  <p>AIコーディングモデルの実力比較 — 2026-04-25 更新</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('verified')">✅ Verified (500)</button>
+  <button class="tab-btn" onclick="switchTab('full')">📊 Full (2,294)</button>
+  <button class="tab-btn" onclick="switchTab('lite')">⚡ Lite (300)</button>
+  <button class="tab-btn" onclick="switchTab('pro')">🏆 Pro (1,865)</button>
+  <button class="tab-btn" onclick="switchTab('trends')">📈 Trends</button>
+</div>
+
+<div id="panel-verified" class="panel active"></div>
+<div id="panel-full" class="panel"></div>
+<div id="panel-lite" class="panel"></div>
+<div id="panel-pro" class="panel"></div>
+<div id="panel-trends" class="panel"></div>
+
+<footer>Data source: swe_bench_ranking.json &nbsp;|&nbsp; Updated 2026-04-25</footer>
+
+<script>
+const DATA = {"swe_bench_verified_ranking": {"last_updated": "2026-04-25", "benchmark_info": {"name": "SWE-bench Verified", "description": "Human-validated subset of SWE-bench with 500 tasks", "total_tasks": 500}, "ranking": [{"rank": 1, "model_name": "Claude Opus 4.5", "score": 80.9, "organization": "Anthropic", "notes": "Released November 2025, first model to score over 80% on SWE-bench Verified, best coding model in the world", "computational_cost": "High", "api_cost_input": "$5.00/1M tokens", "api_cost_output": "$25.00/1M tokens", "additional_results": {"swe_bench_pro": "45.9%"}, "additional_features": {"effort_parameter": "Adjustable reasoning depth", "token_efficiency": "76% fewer output tokens at medium effort", "swe_bench_multilingual": "Leading across 7 of 8 programming languages", "aider_polyglot": "10.6% improvement over Sonnet 4.5", "vending_bench": "29% higher performance than Sonnet 4.5"}}, {"rank": 2, "model_name": "Claude Opus 4.6", "score": 80.8, "organization": "Anthropic", "notes": "Released February 5, 2026, biggest single-generation leap in abstract reasoning, ARC-AGI-2 from 37.6% to 68.8%", "computational_cost": "High", "api_cost_input": "$5.00/1M tokens (<200K), $10.00/1M tokens (>200K)", "api_cost_output": "$25.00/1M tokens (<200K), $37.50/1M tokens (>200K)", "additional_features": {"context_window": "1M tokens (beta), 200K standard", "max_output_tokens": "128K tokens", "adaptive_thinking": "Automatic reasoning depth adjustment based on task complexity", "context_compaction": "Server-side summarization for long-running tasks", "agent_teams": "Multi-agent parallel coordination"}, "additional_results": {"arc_agi_2": "68.8% (vs 37.6% for Opus 4.5)", "terminal_bench_2_0": "65.4%", "osworld": "72.7%", "browsecomp": "84.0%", "biglaw_bench": "90.2%", "humanitys_last_exam_tools": "53.1%", "gdpval_aa_elo": 1606, "mrcr_v2_1m": "76%"}}, {"rank": 3, "model_name": "Gemini 3.1 Pro", "score": 80.6, "organization": "Google", "notes": "Released February 19, 2026 (preview), 2.5x stronger reasoning than Gemini 3 Pro, 1M token context, first .1 increment in Gemini versioning, 82% improvement in agentic tool use", "computational_cost": "High", "api_cost_input": "$2.00/1M tokens (<200K), $4.00/1M tokens (>200K)", "api_cost_output": "$12.00/1M tokens (<200K), $18.00/1M tokens (>200K)", "additional_features": {"context_window": "1M tokens", "max_output_tokens": "64K tokens", "thinking_mode": "MEDIUM thinking mode available", "inference_speed": "112.0 tokens/second", "context_caching": "75% cost reduction with caching", "multimodal": "Text, image, speech, video input"}, "additional_results": {"arc_agi_2": "77.1% (vs 31.1% for Gemini 3 Pro)", "gpqa_diamond": "94.3%", "swe_bench_pro": "54.2%", "livecodebench_pro_elo": 2887}}, {"rank": 4, "model_name": "DeepSeek V4-Pro", "score": 80.6, "organization": "DeepSeek", "notes": "Released April 24, 2026, open-weight model trained on Huawei Ascend 950PR chips, tied with Gemini 3.1 Pro for highest open-weight SWE-bench Verified score, MIT license", "computational_cost": "Medium", "api_cost_input": "$1.74/1M tokens (cache miss), $0.145/1M tokens (cache hit)", "api_cost_output": "$3.48/1M tokens", "additional_features": {"context_window": "1M tokens", "max_output_tokens": "384K tokens", "architecture": "MoE (1.6T total, 49B active)", "reasoning_modes": "3 effort modes (low/medium/high)", "hybrid_attention": "Compressed Sparse Attention + Heavily Compressed Attention", "license": "MIT", "open_weight": true, "training_hardware": "Huawei Ascend 950PR"}, "additional_results": {"swe_bench_pro": "55.4%"}}, {"rank": 5, "model_name": "MiniMax M2.5", "score": 80.2, "organization": "MiniMax", "notes": "Released February 13, 2026, frontier open-weight model with 37% faster inference than M2.1, trained with Forge RL framework across 200K+ environments", "computational_cost": "Medium", "api_cost_input": "$0.30/1M tokens (Lightning), $0.15/1M tokens (Standard)", "api_cost_output": "$2.40/1M tokens (Lightning), $1.20/1M tokens (Standard)", "additional_features": {"context_window": "204K tokens", "max_output_tokens": "131K tokens", "architecture": "Sparse MoE (230B total, 10B active)", "variants": ["M2.5 Standard (50 TPS)", "M2.5 Lightning (100 TPS)"], "training": "Forge RL framework with CISPO algorithm, 200K+ real-world environments"}, "additional_results": {"swe_bench_multilingual": "51.3% (SOTA)", "swe_bench_pro": "55.4%", "browsecomp": "76.3% (with context management)"}}, {"rank": 6, "model_name": "Kimi K2.6", "score": 80.2, "organization": "Moonshot AI", "notes": "Released April 20, 2026, open-weight frontier model with ~1T total parameters (32B active), new SWE-bench Pro SOTA at 58.6%", "computational_cost": "Medium", "api_cost_input": "$0.60/1M tokens", "api_cost_output": "$2.50/1M tokens", "additional_features": {"context_window": "256K tokens", "architecture": "Sparse MoE (~1T total, ~32B active)", "multimodal": true, "vision_encoder": "MoonViT", "open_weight": true, "agentic_capabilities": "Multi-agent swarm support"}, "additional_results": {"swe_bench_pro": "58.6% (new SOTA)", "swe_bench_multilingual": "76.7%", "terminal_bench_2_0": "66.7%", "livecodebench_v6": "89.6%"}}, {"rank": 7, "model_name": "GPT-5.2 Thinking", "score": 80.0, "organization": "OpenAI", "notes": "Released December 11, 2025, advanced reasoning model with extended thinking capabilities", "computational_cost": "Very High", "api_cost_input": "$1.75/1M tokens", "api_cost_output": "$14.00/1M tokens", "additional_features": {"cached_input": "$0.175/1M tokens (90% discount)", "context_window": "400K tokens", "max_output_tokens": "128K tokens", "variants": ["Instant", "Thinking", "Pro"]}, "additional_results": {"swe_bench_pro": "55.6% (new SOTA)", "arc_agi": "91.4%", "gdpval": "70.9%"}}, {"rank": 8, "model_name": "Claude Sonnet 4.6", "score": 79.0, "organization": "Anthropic", "notes": "Released February 2026, significant improvement over Sonnet 4.5, balanced performance and cost for coding tasks", "computational_cost": "Medium", "api_cost_input": "$3.00/1M tokens (<200K), $6.00/1M tokens (>200K)", "api_cost_output": "$15.00/1M tokens (<200K), $22.50/1M tokens (>200K)", "additional_features": {"context_window": "200K tokens", "max_output_tokens": "64K tokens", "knowledge_cutoff": "January 2025"}, "additional_results": {"swe_bench_verified_parallel": "TBD"}}, {"rank": 9, "model_name": "Qwen 3.6 Plus", "score": 78.8, "organization": "Alibaba (Qwen)", "notes": "Released April 2, 2026, frontier-level agentic coding model, 1M context window, always-on chain-of-thought reasoning, MCPMark SOTA, OmniDocBench v1.5 SOTA (91.2)", "computational_cost": "High", "api_cost_input": "$0.325/1M tokens", "api_cost_output": "$1.95/1M tokens", "additional_results": {"swe_bench_pro": "56.6%", "swe_bench_multilingual": "73.8%", "terminal_bench_2_0": "61.6%", "omni_doc_bench_v1_5": "91.2", "real_world_qa": "85.4"}, "additional_features": {"context_window": "1M tokens", "max_output_tokens": "65,536 tokens", "reasoning": "Always-on chain-of-thought", "function_calling": "Native function calling and tool use", "throughput": "~158 tokens/sec"}}, {"rank": 10, "model_name": "GLM-5.1", "score": 78.5, "organization": "Zhipu AI (Z.AI)", "notes": "Released April 2026, incremental improvement over GLM-5, enhanced coding and reasoning capabilities, MIT license, open-weight model", "computational_cost": "Medium", "api_cost_input": "$0.85/1M tokens", "api_cost_output": "$2.80/1M tokens", "additional_features": {"context_window": "200K tokens", "max_output_tokens": "128K tokens", "architecture": "Sparse MoE (744B total, 40B active)", "pre_training_data": "30T tokens", "license": "MIT", "open_weight": true}, "additional_results": {"swe_bench_multilingual": "75.1%", "terminal_bench_2_0": "58.4%", "aime_2026_i": "93.5%", "gpqa_diamond": "87.2%", "browsecomp": "64.3"}}, {"rank": 11, "model_name": "MiniMax M2.7", "score": 78.0, "organization": "MiniMax", "notes": "Released April 12, 2026, first self-evolving agent model, autonomously runs 100+ rounds of scaffold optimization achieving 30% performance improvement, open-weight model", "computational_cost": "Medium", "api_cost_input": "$0.30/1M tokens", "api_cost_output": "$1.20/1M tokens", "additional_features": {"context_window": "204K tokens", "max_output_tokens": "131K tokens", "architecture": "Sparse MoE (230B total, 10B active)", "open_weight": true, "self_evolving": true, "self_evolving_detail": "Autonomously ran 100+ rounds of scaffold optimization, 30% performance improvement"}, "additional_results": {"swe_bench_pro": "56.22%", "swe_bench_multilingual": "76.5%", "multi_swe_bench": "52.7%", "vibe_pro": "55.6%", "terminal_bench_2_0": "57.0%", "nl2repo": "39.8%", "mle_bench_lite": "66.6% medal rate"}}, {"rank": 12, "model_name": "GLM-5", "score": 77.8, "organization": "Zhipu AI (Z.AI)", "notes": "Released February 11, 2026, strongest open-source model, MIT license, trained entirely on Huawei Ascend chips", "computational_cost": "Medium", "api_cost_input": "$0.80/1M tokens", "api_cost_output": "$2.56/1M tokens", "additional_features": {"context_window": "200K tokens", "max_output_tokens": "128K tokens", "architecture": "Sparse MoE (744B total, 40B active)", "pre_training_data": "28.5T tokens", "license": "MIT", "open_weight": true}, "additional_results": {"swe_bench_multilingual": "73.3%", "terminal_bench_2_0": "56.2%", "aime_2026_i": "92.7%", "gpqa_diamond": "86.0%", "browsecomp": "62.0"}}, {"rank": 13, "model_name": "Claude Sonnet 4.5", "score": 77.2, "organization": "Anthropic", "notes": "Released September 2025, best coding model in the world, 30+ hour focus", "computational_cost": "Medium", "api_cost_input": "$3.00/1M tokens (<200K), $6.00/1M tokens (>200K)", "api_cost_output": "$15.00/1M tokens (<200K), $22.50/1M tokens (>200K)", "additional_results": {"swe_bench_verified_parallel": "82.0%", "agentic_terminal_coding": "50.0%", "context_window": "200K+", "swe_bench_pro": "43.6%"}}, {"rank": 14, "model_name": "Kimi K2.5", "score": 76.8, "organization": "Moonshot AI", "notes": "Released January 2026, strongest open-source multimodal agentic model", "computational_cost": "Medium", "api_cost_input": "$0.60/1M tokens", "api_cost_output": "$2.50/1M tokens", "additional_features": {"context_window": "128K tokens", "multimodal": true, "agentic_capabilities": "Up to 100 agents in swarm"}, "additional_results": {"swe_bench_multilingual": "73.0%", "terminal_bench_2_0": "50.8%", "livecodebench_v6": "85.0%"}}, {"rank": 15, "model_name": "GPT-5.1", "score": 76.3, "organization": "OpenAI", "notes": "Released November 2025, improved coding capabilities, 30% fewer tokens", "computational_cost": "High", "api_cost_input": "$1.25/1M tokens", "api_cost_output": "$10.00/1M tokens", "additional_features": {"variants": ["GPT-5.1 Instant", "GPT-5.1 Thinking"], "cache_discount": "90%", "cache_duration": "24 hours"}}, {"rank": 16, "model_name": "Gemini 3 Pro", "score": 76.2, "organization": "Google", "notes": "Released November 2025, agentic coding single attempt, 1M token context", "computational_cost": "High", "api_cost_input": "$2.00/1M tokens (<200K), $4.00/1M tokens (>200K)", "api_cost_output": "$12.00/1M tokens (<200K), $18.00/1M tokens (>200K)", "additional_results": {"lmarena_elo": 1501, "context_window": "1M tokens", "swe_bench_pro": "43.3%"}}, {"rank": 17, "model_name": "GPT-5", "score": 74.9, "organization": "OpenAI", "notes": "Released August 2025, unified reasoning model", "computational_cost": "High", "api_cost_input": "$1.25/1M tokens", "api_cost_output": "$10.00/1M tokens", "additional_results": {"swe_bench_pro": "41.8%"}}, {"rank": 18, "model_name": "Qwen 3.6", "score": 74.2, "organization": "Alibaba (Qwen)", "notes": "Open-source version of Qwen 3.6, developer-friendly sizes, strong agentic coding baseline", "computational_cost": "Medium", "api_cost_input": "$0.14/1M tokens (est.)", "api_cost_output": "$0.60/1M tokens (est.)"}, {"rank": 19, "model_name": "MiniMax M2.1", "score": 74.0, "organization": "MiniMax", "notes": "Released December 23, 2025, strongest open-source model for agentic workloads", "computational_cost": "Medium", "api_cost_input": "$0.27/1M tokens", "api_cost_output": "$1.12/1M tokens", "additional_features": {"context_window": "196K tokens", "max_output_tokens": "65K tokens", "architecture": "Sparse MoE (230B total, 10B active)"}, "additional_results": {"swe_bench_multilingual": "72.5%", "vibe_aggregate": "88.6", "swe_bench_pro": "36.8%"}}, {"rank": 20, "model_name": "GLM-4.7", "score": 73.8, "organization": "Zhipu AI", "notes": "Released December 22, 2025, open-weight coding and reasoning model", "computational_cost": "Medium", "api_cost_input": "$0.60/1M tokens", "api_cost_output": "$2.20/1M tokens", "additional_features": {"cached_tokens": "$0.11/1M tokens", "improvement_over_4_6": "+5.8%"}, "additional_results": {"swe_bench_multilingual": "66.7% (+12.9% vs GLM-4.6)", "livecodebench_v6": "84.9", "terminal_bench_2_0": "41.0% (+16.5% improvement)"}}, {"rank": 21, "model_name": "Grok 4", "score": 73.5, "organization": "xAI", "notes": "Released July 2025, 256K context window", "computational_cost": "Very High", "api_cost_input": "$3.00/1M tokens", "api_cost_output": "$15.00/1M tokens", "additional_features": {"cached_tokens": "$0.75/1M tokens", "live_search": "$25.00/1K sources"}}, {"rank": 22, "model_name": "DeepSeek 3.2 Thinking", "score": 73.1, "organization": "DeepSeek", "notes": "Released September 2025, V3.2-Exp with enhanced thinking capabilities, 128K context", "computational_cost": "Medium", "api_cost_input": "$0.28/1M tokens (cache miss), $0.028/1M tokens (cache hit)", "api_cost_output": "$0.42/1M tokens", "additional_features": {"cache_mechanism": "90% discount on cache hit", "context_window": "128K tokens", "price_reduction": "50% cost reduction from V3.1"}, "additional_results": {"swe_bench_verified_base": "67.8% (without thinking mode)"}}, {"rank": 23, "model_name": "Claude 4 Sonnet", "score": 72.7, "organization": "Anthropic", "notes": "Released May 2025, outperforms Opus on practical coding", "computational_cost": "Medium", "api_cost_input": "$3.00/1M tokens", "api_cost_output": "$15.00/1M tokens", "additional_results": {"swe_bench_pro": "42.7%"}}, {"rank": 24, "model_name": "Claude 4 Opus", "score": 72.5, "organization": "Anthropic", "notes": "79.4% with parallel test-time compute", "computational_cost": "High", "api_cost_input": "$15.00/1M tokens", "api_cost_output": "$75.00/1M tokens"}, {"rank": 25, "model_name": "OpenAI o3", "score": 71.7, "organization": "OpenAI", "notes": "Released April 16, 2025. Official result 71.7% (Dec 2024 announcement). Can use tools directly in agentic approach. 80% price reduction", "computational_cost": "Very High", "api_cost_input": "$0.40/1M tokens", "api_cost_output": "$1.60/1M tokens", "additional_features": {"o3_flex": "$5.00/1M input, $20.00/1M output", "context_window": "200K tokens", "prompt_caching": "75% discount for cached tokens"}, "additional_results": {"swe_bench_verified_69_1": "69.1% (updated measurement April 2025)", "codeforces_elo": 2727, "aime_2025": "88.9%"}}, {"rank": 26, "model_name": "Kimi K2 (Parallel Test-time Compute)", "score": 71.6, "organization": "Moonshot AI", "notes": "With parallel test-time compute sampling", "computational_cost": "High", "api_cost_input": "$0.15/1M tokens", "api_cost_output": "$2.50/1M tokens"}, {"rank": 27, "model_name": "Kimi K2 Thinking", "score": 71.3, "organization": "Moonshot AI", "notes": "Released November 2025, open-source reasoning model with thinking capabilities", "computational_cost": "High", "api_cost_input": "$0.15/1M tokens", "api_cost_output": "$2.50/1M tokens", "additional_results": {"swe_bench_multilingual": "61.1%", "livecodebench_v6": "83.1%", "terminal_bench": "47.1%"}}, {"rank": 28, "model_name": "OpenAI o3 (Low Compute)", "score": 70.3, "organization": "OpenAI", "notes": "Lower compute version of o3. Historical score from Dec 2024", "computational_cost": "High", "api_cost_input": "$0.40/1M tokens", "api_cost_output": "$1.60/1M tokens"}, {"rank": 29, "model_name": "MiniMax M2", "score": 69.4, "organization": "MiniMax", "notes": "Released October 27, 2025, open-weight model with 230B total parameters", "computational_cost": "Medium", "api_cost_input": "$0.30/1M tokens", "api_cost_output": "$1.20/1M tokens", "additional_features": {"cache_hits": "$0.03/1M tokens", "architecture": "Sparse MoE (230B total, 10B active)", "cost_comparison": "8% of Claude 4.5 Sonnet cost"}, "additional_results": {"inference_speed": "2x faster than Claude 4.5 Sonnet"}}, {"rank": 30, "model_name": "o4-mini", "score": 68.1, "organization": "OpenAI", "notes": "Released April 16, 2025. Fast cost-efficient reasoning model. Can use tools directly in agentic approach", "computational_cost": "Low", "api_cost_input": "$1.10/1M tokens", "api_cost_output": "$4.40/1M tokens", "additional_features": {"context_window": "200K tokens", "max_output_tokens": "100K tokens", "caching_batching": "Supported"}, "additional_results": {"aime_2025": "92.7%"}}, {"rank": 31, "model_name": "GLM-4.6", "score": 68.0, "organization": "Zhipu AI", "notes": "Released September 2025, 355B parameter MoE model with enhanced coding capabilities", "computational_cost": "Medium", "api_cost_input": "$0.60/1M tokens", "api_cost_output": "$2.20/1M tokens", "additional_features": {"cached_tokens": "$0.11/1M tokens", "glm_4_6_air": "$0.20/1M input, $1.10/1M output"}}, {"rank": 32, "model_name": "DeepSeek V3.1", "score": 66.0, "organization": "DeepSeek", "notes": "Released August 21, 2025. Hybrid model with think/non-think modes. Enhanced agent capabilities and tool usage", "computational_cost": "Medium", "api_cost_input": "$0.27/1M tokens (cache miss), $0.07/1M tokens (cache hit)", "api_cost_output": "$1.10/1M tokens", "additional_results": {"swe_bench_multilingual": "54.5%", "terminal_bench": "31.3%", "aider_benchmark": "71.6%", "context_length": "128K tokens"}}, {"rank": 33, "model_name": "DeepSeek R1 (Agentic)", "score": 65.8, "organization": "DeepSeek", "notes": "Open source reasoning model", "computational_cost": "Medium", "api_cost_input": "$0.55/1M tokens", "api_cost_output": "$2.19/1M tokens"}, {"rank": 34, "model_name": "Kimi K2", "score": 65.8, "organization": "Moonshot AI", "notes": "Open-source trillion parameter MoE model, single attempt", "computational_cost": "Medium", "api_cost_input": "$0.15/1M tokens", "api_cost_output": "$2.50/1M tokens", "additional_results": {"swe_bench_pro": "27.7%"}}, {"rank": 35, "model_name": "Mini-SWE-agent", "score": 65.0, "organization": "Open Source", "notes": "Achieved with 100 lines of Python code", "computational_cost": "Low", "api_cost_input": "Free/Open Source", "api_cost_output": "Free/Open Source"}, {"rank": 36, "model_name": "GLM-4.5", "score": 64.2, "organization": "Zhipu AI", "notes": "Chinese AI model, open-source 355B parameter MoE model", "computational_cost": "Medium", "api_cost_input": "$0.60/1M tokens", "api_cost_output": "$2.20/1M tokens", "additional_features": {"cached_tokens": "$0.11/1M tokens", "glm_4_5_air": "$0.20/1M input, $1.10/1M output"}}, {"rank": 37, "model_name": "Gemini 2.5 Flash", "score": 63.8, "organization": "Google", "notes": "Thinking model with custom agent setup", "computational_cost": "Medium", "api_cost_input": "$0.30/1M tokens", "api_cost_output": "$2.50/1M tokens"}, {"rank": 38, "model_name": "Gemini 2.5 Pro", "score": 63.2, "organization": "Google", "notes": "Google's reasoning model with extended thinking capabilities", "computational_cost": "High", "api_cost_input": "$1.25/1M tokens (<200K), $2.50/1M tokens (>200K)", "api_cost_output": "$10.00/1M tokens (<200K), $15.00/1M tokens (>200K)", "additional_features": {"batch_api_input": "$0.625/1M (<200K), $1.25/1M (>200K)", "batch_api_output": "$5.00/1M (<200K), $7.50/1M (>200K)", "free_tier": "5 RPM, 25 requests/day"}}, {"rank": 39, "model_name": "GPT-OSS-120b", "score": 62.4, "organization": "OpenAI", "notes": "Open source competitive model", "computational_cost": "High"}, {"rank": 40, "model_name": "Claude 3.7 Sonnet", "score": 62.3, "organization": "Anthropic", "notes": "Previous generation model with extended thinking mode", "computational_cost": "Medium", "api_cost_input": "$3.00/1M tokens", "api_cost_output": "$15.00/1M tokens", "additional_features": {"thinking_tokens": "Included in output pricing", "prompt_caching": "90% discount", "batch_processing": "50% discount"}}, {"rank": 41, "model_name": "CodeStory Midwit Agent + swe-search", "score": 62.0, "organization": "CodeStory", "notes": "Multi-agent brute force approach", "computational_cost": "Very High"}, {"rank": 42, "model_name": "GPT-4.1", "score": 54.6, "organization": "OpenAI", "notes": "OpenAI's latest general purpose model", "computational_cost": "High"}, {"rank": 43, "model_name": "Claude 3.5 Sonnet (Latest)", "score": 50.8, "organization": "Anthropic", "notes": "Latest production version", "computational_cost": "Medium"}, {"rank": 44, "model_name": "DeepSeek R1", "score": 49.2, "organization": "DeepSeek", "notes": "Base reasoning model without agentic scaffolding", "computational_cost": "Medium", "api_cost_input": "$0.55/1M tokens", "api_cost_output": "$2.19/1M tokens"}, {"rank": 45, "model_name": "Claude 3.5 Sonnet (Upgraded)", "score": 49.0, "organization": "Anthropic", "notes": "Previous state-of-the-art", "computational_cost": "Medium"}, {"rank": 46, "model_name": "OpenAI o1", "score": 48.9, "organization": "OpenAI", "notes": "First reasoning model", "computational_cost": "High", "api_cost_input": "$15.00/1M tokens", "api_cost_output": "$60.00/1M tokens"}, {"rank": 47, "model_name": "Grok 3", "score": 46.8, "organization": "xAI", "notes": "Previous generation from xAI", "computational_cost": "High", "api_cost_input": "$2.00/1M tokens (est.)", "api_cost_output": "$8.00/1M tokens (est.)"}, {"rank": 48, "model_name": "GPT-4o", "score": 33.2, "organization": "OpenAI", "notes": "With best performing scaffold", "computational_cost": "Medium", "api_cost_input": "$2.50/1M tokens", "api_cost_output": "$10.00/1M tokens"}]}, "swe_bench_full_ranking": {"last_updated": "2025-11-23", "benchmark_info": {"name": "SWE-bench Full", "description": "Complete dataset with 2,294 real-world GitHub issues", "total_tasks": 2294}, "ranking": [{"rank": 1, "model_name": "Claude 3.7 Sonnet Agent", "score": 33.83, "organization": "Anthropic", "notes": "As of April 2025", "computational_cost": "Medium", "api_cost_input": "$3.00/1M tokens", "api_cost_output": "$15.00/1M tokens"}, {"rank": 2, "model_name": "Top Performers (General)", "score": 20.0, "organization": "Various", "notes": "Approximate range for leading models as of January 2025", "computational_cost": "Various"}]}, "swe_bench_lite_ranking": {"last_updated": "2025-11-23", "benchmark_info": {"name": "SWE-bench Lite", "description": "Curated subset with 300 tasks for faster evaluation", "total_tasks": 300}, "ranking": [{"rank": 1, "model_name": "Top Performers", "score": 43.0, "organization": "Various", "notes": "As of January 2025", "computational_cost": "Various"}]}, "swe_bench_pro_ranking": {"last_updated": "2026-04-25", "benchmark_info": {"name": "SWE-bench Pro", "description": "Enterprise-level benchmark with 1865 tasks across 41 professional repositories", "total_tasks": 1865, "public_tasks": 731, "contamination_resistant": true, "license": "GPL and strong copyleft licenses", "data_source": "https://scale.com/leaderboard/swe_bench_pro_public"}, "ranking": [{"rank": 1, "model_name": "Kimi K2.6", "score": 58.6, "organization": "Moonshot AI", "notes": "SWE-bench Pro new SOTA, April 20 2026, open-weight 1T MoE model"}, {"rank": 2, "model_name": "GPT-5.5", "score": 58.6, "organization": "OpenAI", "notes": "Released April 23, 2026, ties Kimi K2.6 for SWE-bench Pro SOTA, first fully retrained base model since GPT-4.5, Terminal-Bench 2.0 82.7% all-model best, MRCR v2 1M 74.0%"}, {"rank": 3, "model_name": "GPT-5.3 Codex", "score": 56.8, "organization": "OpenAI", "notes": "Previous SWE-bench Pro SOTA, February 2026, combines GPT-5.2 and GPT-5.2-Codex capabilities"}, {"rank": 4, "model_name": "Qwen 3.6 Plus", "score": 56.6, "organization": "Alibaba (Qwen)", "notes": "Released April 2, 2026, third highest SWE-bench Pro score"}, {"rank": 5, "model_name": "GPT-5.2 Thinking", "score": 55.6, "organization": "OpenAI", "notes": "Previous SWE-bench Pro SOTA, December 2025"}, {"rank": 6, "model_name": "MiniMax M2.5", "score": 55.4, "organization": "MiniMax", "notes": "February 2026"}, {"rank": 7, "model_name": "DeepSeek V4-Pro", "score": 55.4, "organization": "DeepSeek", "notes": "April 2026, open-weight model, ties with MiniMax M2.5 on SWE-bench Pro"}, {"rank": 8, "model_name": "Gemini 3.1 Pro", "score": 54.2, "organization": "Google", "notes": "February 2026"}, {"rank": 9, "model_name": "Claude Opus 4.5", "score": 45.9, "organization": "Anthropic", "notes": "November 2025"}, {"rank": 10, "model_name": "Claude Sonnet 4.5", "score": 43.6, "organization": "Anthropic", "notes": "September 2025"}, {"rank": 11, "model_name": "Gemini 3 Pro", "score": 43.3, "organization": "Google", "notes": "November 2025"}, {"rank": 12, "model_name": "Claude 4 Sonnet", "score": 42.7, "organization": "Anthropic", "notes": "May 2025"}, {"rank": 14, "model_name": "GPT-5", "score": 41.8, "organization": "OpenAI", "notes": "August 2025"}, {"rank": 15, "model_name": "MiniMax M2.1", "score": 36.8, "organization": "MiniMax", "notes": "December 2025"}, {"rank": 16, "model_name": "Kimi K2", "score": 27.7, "organization": "Moonshot AI", "notes": "2025"}]}, "coding_performance_metrics": {"codeforces_elo": [{"model_name": "OpenAI o3", "elo_rating": 2727, "percentile": 99.9, "notes": "International Grandmaster level, top 200 competitive coders globally"}, {"model_name": "OpenAI o1", "elo_rating": 1891, "percentile": "Not specified", "notes": "Previous generation for comparison"}, {"model_name": "Qwen3-235B", "elo_rating": 2056, "percentile": 95.0}, {"model_name": "DeepSeek R1", "elo_rating": 2029, "percentile": 96.3}], "aime_scores": [{"model_name": "OpenAI o3", "score": 88.9, "year": "2025", "notes": "Updated score from April 2025 release"}, {"model_name": "o4-mini", "score": 92.7, "year": "2025", "notes": "Surprisingly outperformed o3 on AIME 2025"}, {"model_name": "OpenAI o3", "score": 96.7, "year": "2024", "notes": "Historical score from December 2024 announcement"}, {"model_name": "Qwen3-235B", "score": 85.7, "year": "2024"}, {"model_name": "Qwen3-235B", "score": 81.4, "year": "2025"}]}, "performance_trends": {"2023": {"swe_bench_success_rate": 4.4, "description": "Early AI coding capabilities"}, "2024": {"swe_bench_success_rate": 71.7, "description": "OpenAI o3 announcement (Dec 2024) - massive improvement in coding capabilities"}, "2025": {"swe_bench_success_rate": 80.9, "description": "Claude Opus 4.5 breaks the 80% barrier (Nov 2025), first model to score over 80%. Claude Sonnet 4.5 achieved 77.2% (Sep 2025). GPT-5.1 and Gemini 3 Pro follow at 76.3% and 76.2%"}, "2026": {"swe_bench_success_rate": 80.8, "description": "Claude Opus 4.6 (80.8%, Feb 2026) with ARC-AGI-2 68.8%. DeepSeek V4-Pro (80.6%, Apr 2026) ties Gemini 3.1 Pro as open-weight SOTA, trained on Huawei Ascend chips, MIT license. Kimi K2.6 and MiniMax M2.5 both achieve 80.2% (Apr 2026). GPT-5.5 (Apr 2026) ties Kimi K2.6 for SWE-bench Pro SOTA at 58.6%, Terminal-Bench 2.0 all-model best at 82.7%. MiniMax M2.7 achieves 78.0% (Apr 2026)."}}};
+
+const ORG_COLORS = {
+  "Anthropic": "#D97706",
+  "Google": "#2563EB",
+  "OpenAI": "#059669",
+  "DeepSeek": "#7C3AED",
+  "Moonshot AI": "#DB2777",
+  "MiniMax": "#0891B2",
+  "Alibaba (Qwen)": "#EA580C",
+  "Zhipu AI": "#65A30D",
+  "Zhipu AI (Z.AI)": "#65A30D",
+  "xAI": "#6B7280",
+  "Open Source": "#6366F1"
+};
+
+function scoreColor(s) {
+  if (s >= 75) return '#22c55e';
+  if (s >= 60) return '#eab308';
+  if (s >= 45) return '#f97316';
+  return '#ef4444';
+}
+
+function rankClass(r) {
+  if (r === 1) return 'gold';
+  if (r === 2) return 'silver';
+  if (r === 3) return 'bronze';
+  return '';
+}
+
+function orgBadge(org) {
+  const color = ORG_COLORS[org] || '#6B7280';
+  return `<span class="org-badge" style="border:1px solid ${color}44;color:${color}">${org}</span>`;
+}
+
+function buildRankingTable(panelId, rankingData, benchmarkName) {
+  const panel = document.getElementById(panelId);
+  if (!rankingData || !rankingData.ranking) {
+    panel.innerHTML = `<p style="color:var(--text-muted);padding:24px">データなし</p>`;
+    return;
+  }
+  const rows = rankingData.ranking;
+  const maxScore = Math.max(...rows.map(r => r.score || 0));
+
+  let sortCol = 'rank';
+  let sortDir = 1;
+
+  function render(data) {
+    const countEl = panel.querySelector('.count-badge');
+    if (countEl) countEl.textContent = `${data.length} モデル`;
+
+    const tbody = panel.querySelector('tbody');
+    tbody.innerHTML = data.map(item => {
+      const score = item.score || 0;
+      const barWidth = maxScore > 0 ? (score / maxScore * 100).toFixed(1) : 0;
+      const barColor = scoreColor(score);
+      return `
+        <tr>
+          <td class="rank-cell ${rankClass(item.rank)}">${item.rank || '—'}</td>
+          <td class="model-cell">
+            <span class="model-name" title="${item.model_name}">${item.model_name}</span>
+            ${item.notes ? `<span class="model-meta" title="${item.notes}">${item.notes}</span>` : ''}
+          </td>
+          <td class="score-cell">
+            <span class="score-val" style="color:${barColor}">${score.toFixed(1)}%</span>
+            <div class="score-bar-wrap"><div class="score-bar" style="width:${barWidth}%;background:${barColor}"></div></div>
+          </td>
+          <td>${orgBadge(item.organization || '—')}</td>
+          <td class="cost-cell">
+            ${item.api_cost_input ? `<span>IN: ${item.api_cost_input}</span>` : ''}
+            ${item.api_cost_output ? `<span>OUT: ${item.api_cost_output}</span>` : ''}
+            ${!item.api_cost_input && !item.api_cost_output ? '<span>—</span>' : ''}
+          </td>
+          <td class="notes-cell" title="${item.computational_cost || ''}">${item.computational_cost || '—'}</td>
+        </tr>`;
+    }).join('');
+  }
+
+  function sort(col) {
+    if (sortCol === col) { sortDir *= -1; } else { sortCol = col; sortDir = 1; }
+    panel.querySelectorAll('th[data-col]').forEach(th => {
+      th.classList.remove('sort-asc', 'sort-desc');
+      if (th.dataset.col === col) th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+    });
+    applyFilter();
+  }
+
+  let currentSearch = '';
+  function applyFilter() {
+    let data = rows.filter(r => r.model_name.toLowerCase().includes(currentSearch));
+    data = [...data].sort((a, b) => {
+      let av = a[sortCol] ?? (sortCol === 'rank' ? 999 : '');
+      let bv = b[sortCol] ?? (sortCol === 'rank' ? 999 : '');
+      if (typeof av === 'string') av = av.toLowerCase();
+      if (typeof bv === 'string') bv = bv.toLowerCase();
+      return av < bv ? -sortDir : av > bv ? sortDir : 0;
+    });
+    render(data);
+    panel.querySelector('.count-badge').textContent = `${data.length} モデル`;
+  }
+
+  panel.innerHTML = `
+    <div class="controls">
+      <input class="search-box" type="text" placeholder="モデル名で検索..." />
+      <span class="count-badge">${rows.length} モデル</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-col="rank">順位<span class="sort-icon"></span></th>
+            <th data-col="model_name">モデル<span class="sort-icon"></span></th>
+            <th data-col="score">スコア<span class="sort-icon sort-desc"></span></th>
+            <th data-col="organization">組織<span class="sort-icon"></span></th>
+            <th>APIコスト</th>
+            <th data-col="computational_cost">計算コスト<span class="sort-icon"></span></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>`;
+
+  panel.querySelectorAll('th[data-col]').forEach(th => {
+    th.addEventListener('click', () => sort(th.dataset.col));
+    if (th.dataset.col === 'rank') th.classList.add('sort-asc');
+  });
+
+  panel.querySelector('.search-box').addEventListener('input', e => {
+    currentSearch = e.target.value.toLowerCase();
+    applyFilter();
+  });
+
+  applyFilter();
+}
+
+function buildTrendsPanel() {
+  const panel = document.getElementById('panel-trends');
+  const trends = DATA.performance_trends;
+  const metrics = DATA.coding_performance_metrics;
+
+  let html = '';
+
+  // Performance Trends
+  html += `<div class="section-heading">年別パフォーマンストレンド (SWE-bench)</div>`;
+  html += `<div class="trend-grid">`;
+  for (const [year, d] of Object.entries(trends || {})) {
+    html += `
+      <div class="card">
+        <div class="card-title">${year}</div>
+        <div class="card-value">${d.swe_bench_success_rate}%</div>
+        <div class="card-sub">${d.description}</div>
+      </div>`;
+  }
+  html += `</div>`;
+
+  // Codeforces ELO
+  const cfe = metrics?.codeforces_elo || [];
+  if (cfe.length) {
+    html += `<div class="section-heading">Codeforces ELO ランキング</div>`;
+    html += `<div class="table-wrap"><table><thead><tr><th>モデル</th><th>ELO</th><th>パーセンタイル</th></tr></thead><tbody>`;
+    cfe.forEach(item => {
+      const pct = typeof item.percentile === 'number' ? item.percentile.toFixed(1) + '%' : item.percentile;
+      html += `<tr><td>${item.model_name}</td><td style="font-weight:700;color:#6366f1">${item.elo_rating}</td><td>${pct}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+
+  // AIME Scores
+  const aime = metrics?.aime_scores || [];
+  if (aime.length) {
+    html += `<div class="section-heading">AIME スコア</div>`;
+    html += `<div class="table-wrap"><table><thead><tr><th>モデル</th><th>スコア</th><th>年度</th></tr></thead><tbody>`;
+    aime.forEach(item => {
+      html += `<tr><td>${item.model_name}</td><td style="font-weight:700;color:#22c55e">${item.score.toFixed(1)}%</td><td>${item.year}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+
+  panel.innerHTML = html;
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    const names = ['verified','full','lite','pro','trends'];
+    b.classList.toggle('active', names[i] === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+// Initialize
+buildRankingTable('panel-verified', DATA.swe_bench_verified_ranking, 'SWE-bench Verified');
+buildRankingTable('panel-full', DATA.swe_bench_full_ranking, 'SWE-bench Full');
+buildRankingTable('panel-lite', DATA.swe_bench_lite_ranking, 'SWE-bench Lite');
+buildRankingTable('panel-pro', DATA.swe_bench_pro_ranking, 'SWE-bench Pro');
+buildTrendsPanel();
+</script>
+</body>
+</html>
