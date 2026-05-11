@@ -1,4 +1,4 @@
-# SWE-bench AIランキング (2026年4月版)
+# SWE-bench AIランキング (2026年5月版)
 
 ## 📊 概要
 
@@ -6,20 +6,32 @@
 
 ## 🏆 トップ10モデル（SWE-bench Verified）
 
-1. **Claude Opus 4.5**: 80.9% （2025年11月リリース）
-2. **Claude Opus 4.6**: 80.8% （2026年2月リリース）
-3. **Gemini 3.1 Pro**: 80.6% （2026年2月リリース）
-4. **DeepSeek V4-Pro**: 80.6% （2026年4月リリース）🆕
-5. **MiniMax M2.5**: 80.2% （2026年2月リリース）
-6. **Kimi K2.6**: 80.2% （2026年4月リリース）
-7. **GPT-5.2 Thinking**: 80.0% （2025年12月リリース）
-8. **Claude Sonnet 4.6**: 79.0% （2026年2月リリース）
-9. **Qwen 3.6 Plus**: 78.8% （2026年4月リリース）
-10. **GLM-5.1**: 78.5% （2026年4月リリース）
+1. **Claude Opus 4.7**: 87.6% （2026年4月リリース）🆕
+2. **Claude Opus 4.5**: 80.9% （2025年11月リリース）
+3. **Claude Opus 4.6**: 80.8% （2026年2月リリース）
+4. **Gemini 3.1 Pro**: 80.6% （2026年2月リリース）
+5. **DeepSeek V4-Pro**: 80.6% （2026年4月リリース）
+6. **MiniMax M2.5**: 80.2% （2026年2月リリース）
+7. **Kimi K2.6**: 80.2% （2026年4月リリース）
+8. **GPT-5.2 Thinking**: 80.0% （2025年12月リリース）
+9. **Claude Sonnet 4.6**: 79.0% （2026年2月リリース）
+10. **Qwen 3.6 Plus**: 78.8% （2026年4月リリース）
 
 ### 新着のトップモデル
 
-#### DeepSeek V4-Pro #4 🆕
+#### Claude Opus 4.7 #1 🆕
+- **87.6%** - SWE-bench Verified（2026年4月16日リリース）、前世代 Opus 4.6 の 80.8% から大幅向上
+- **SWE-bench Pro 64.3%** - Kimi K2.6（58.6%）を超え全モデル最高スコア
+- **高解像度画像サポート** - 最大2576px / 3.75MP（従来の Claude モデルの3倍）
+- **新 xhigh エフォートレベル** - high と max の中間の推論/レイテンシトレードオフを実現
+- **1Mトークンコンテキスト** - 追加料金なし、128K出力トークン
+- **タスクバジェット** - 公開ベータとして提供
+- **ARC-AGI-2 75.83%** - Opus 4.6の68.8%から向上
+- **Terminal-Bench 2.0 69.4%** - Opus 4.6の65.4%から向上
+- **GPQA Diamond 94.2%** - Opus 4.6の91.3%から向上
+- **API価格** - $5.00/1M入力、$25.00/1M出力（Opus 4.6と同価格）
+
+#### DeepSeek V4-Pro #5
 - **80.6%** - SWE-bench Verified（2026年4月24日リリース）
 - **オープンウェイト最高スコア** - Gemini 3.1 Pro と並んで SWE-bench Verified 3位タイ、MITライセンスで公開
 - **1.6T MoEアーキテクチャ** - 1.6兆パラメータ（アクティブ49B）、Hybrid Attention（CSA + HCA）採用
@@ -69,7 +81,7 @@
 - **バランス型モデル** - 高い性能とコスト効率を両立、コーディングタスクに最適
 - **API価格** - $3.00/1M入力（<200K）、$15.00/1M出力（<200K）（Sonnet 4.5と同価格）
 
-#### Claude Opus 4.6 #2 🆕
+#### Claude Opus 4.6 #3
 - **80.8%** - SWE-bench Verified（2026年2月5日リリース）
 - **ARC-AGI-2 68.8%** - Opus 4.5の37.6%からほぼ倍増、抽象推論で歴史的な飛躍
 - **1Mコンテキストウィンドウ** - ベータ版で100万トークン対応、128K出力上限
@@ -191,7 +203,7 @@
 - **API価格** - $0.30/1M入力、$1.20/1M出力（キャッシュヒット時$0.03/1M）
 - **Sparse MoE アーキテクチャ** - 最新のMixture-of-Expertsアーキテクチャ採用
 
-#### Claude Opus 4.5 🏆 #1
+#### Claude Opus 4.5 #2
 - **80.9%** - SWE-bench Verified（2025年11月24日リリース）
 - **世界初の80%超え** - SWE-bench Verifiedで初めて80%の壁を突破したモデル
 - **200K コンテキストウィンドウ** - 200,000トークンの長文対応、64Kトークン出力上限
@@ -274,23 +286,24 @@ python swe_rank_viewer.py --format json
 - **2023年**: 4.4% - 初期のAIコーディング能力
 - **2024年**: 71.7% - OpenAI o3発表による大幅改善（12月）
 - **2025年**: 80.9% - Claude Opus 4.5が80%の壁を突破（11月）、Claude Sonnet 4.5が77.2%達成（9月）、GPT-5.1（76.3%）とGemini 3 Pro（76.2%）が続く
-- **2026年**: 80.6% - Gemini 3.1 Pro（80.6%、2月）が3位に、Claude Opus 4.6（80.8%、2月）、MiniMax M2.5が80.2%でトップ4入り・競合の1/20コスト（2月）、Claude Sonnet 4.6が79.0%で6位（2月）、GLM-5が77.8%でオープンソース最高記録（2月）、GPT-5.3 CodexがTerminal-Bench 2.0で77.3%達成（2月）、MiniMax M2.7（78.0%）が世界初の自己進化型エージェントモデルとして（4月）、Kimi K2.6（80.2%）がオープンウェイトでSWE-bench Pro 58.6%新SOTAを達成（4月）
+- **2026年**: 87.6% - Claude Opus 4.7が87.6%で新SOTA達成・SWE-bench Pro 64.3%も更新（4月）、Gemini 3.1 Pro（80.6%、2月）が4位に、Claude Opus 4.6（80.8%、2月）、MiniMax M2.5が80.2%でトップ入り・競合の1/20コスト（2月）、Claude Sonnet 4.6が79.0%で9位（2月）、GLM-5が77.8%でオープンソース最高記録（2月）、GPT-5.3 CodexがTerminal-Bench 2.0で77.3%達成（2月）、MiniMax M2.7（78.0%）が世界初の自己進化型エージェントモデルとして（4月）、Kimi K2.6（80.2%）がオープンウェイトでSWE-bench Pro 58.6%達成（4月）
 
 ## 📊 完全ランキング（SWE-bench Verified + Pro）
 
 | ランク | モデル名 | Verified | Pro | 組織 | リリース時期 | API価格（入力/出力） |
 |--------|----------|----------|-----|------|--------------|---------------------|
-| 1 | Claude Opus 4.5 | 80.9% | 45.9% | Anthropic | 2025年11月 | $5.00/$25.00 per 1M tokens |
-| 2 | Claude Opus 4.6 | 80.8% | - | Anthropic | 2026年2月 | $5.00/$25.00 per 1M tokens |
-| 3 | Gemini 3.1 Pro | 80.6% | 54.2% | Google | 2026年2月 | $2.00/$12.00 per 1M tokens |
-| 4 | DeepSeek V4-Pro 🆕 | 80.6% | 55.4% | DeepSeek | 2026年4月 | $1.74/$3.48 per 1M tokens |
-| 5 | MiniMax M2.5 | 80.2% | 55.4% | MiniMax | 2026年2月 | $0.30/$2.40 per 1M tokens (Lightning) |
-| 6 | Kimi K2.6 | 80.2% | 58.6% 🏆 | Moonshot AI | 2026年4月 | $0.60/$2.50 per 1M tokens |
-| 7 | GPT-5.2 Thinking | 80.0% | 55.6% | OpenAI | 2025年12月 | $1.75/$14.00 per 1M tokens |
-| 8 | Claude Sonnet 4.6 | 79.0% | - | Anthropic | 2026年2月 | $3.00/$15.00 per 1M tokens |
-| 9 | Qwen 3.6 Plus | 78.8% | 56.6% | Alibaba (Qwen) | 2026年4月 | $0.325/$1.95 per 1M tokens |
-| 10 | GLM-5.1 | 78.5% | - | Zhipu AI (Z.AI) | 2026年4月 | $0.85/$2.80 per 1M tokens |
-| 11 | MiniMax M2.7 | 78.0% | 56.22% | MiniMax | 2026年4月 | $0.30/$1.20 per 1M tokens |
+| 1 | Claude Opus 4.7 🆕 | 87.6% | 64.3% 🏆 | Anthropic | 2026年4月 | $5.00/$25.00 per 1M tokens |
+| 2 | Claude Opus 4.5 | 80.9% | 45.9% | Anthropic | 2025年11月 | $5.00/$25.00 per 1M tokens |
+| 3 | Claude Opus 4.6 | 80.8% | - | Anthropic | 2026年2月 | $5.00/$25.00 per 1M tokens |
+| 4 | Gemini 3.1 Pro | 80.6% | 54.2% | Google | 2026年2月 | $2.00/$12.00 per 1M tokens |
+| 5 | DeepSeek V4-Pro | 80.6% | 55.4% | DeepSeek | 2026年4月 | $1.74/$3.48 per 1M tokens |
+| 6 | MiniMax M2.5 | 80.2% | 55.4% | MiniMax | 2026年2月 | $0.30/$2.40 per 1M tokens (Lightning) |
+| 7 | Kimi K2.6 | 80.2% | 58.6% | Moonshot AI | 2026年4月 | $0.60/$2.50 per 1M tokens |
+| 8 | GPT-5.2 Thinking | 80.0% | 55.6% | OpenAI | 2025年12月 | $1.75/$14.00 per 1M tokens |
+| 9 | Claude Sonnet 4.6 | 79.0% | - | Anthropic | 2026年2月 | $3.00/$15.00 per 1M tokens |
+| 10 | Qwen 3.6 Plus | 78.8% | 56.6% | Alibaba (Qwen) | 2026年4月 | $0.325/$1.95 per 1M tokens |
+| 11 | GLM-5.1 | 78.5% | - | Zhipu AI (Z.AI) | 2026年4月 | $0.85/$2.80 per 1M tokens |
+| 12 | MiniMax M2.7 | 78.0% | 56.22% | MiniMax | 2026年4月 | $0.30/$1.20 per 1M tokens |
 | 12 | GLM-5 | 77.8% | - | Zhipu AI (Z.AI) | 2026年2月 | $0.80/$2.56 per 1M tokens |
 | 13 | Claude Sonnet 4.5 | 77.2% | 43.6% | Anthropic | 2025年9月 | $3.00/$15.00 per 1M tokens |
 | 14 | Kimi K2.5 | 76.8% | - | Moonshot AI | 2026年1月 | $0.60/$2.50 per 1M tokens |
@@ -510,7 +523,8 @@ python swe_rank_viewer.py --format json
 
 ## 🔄 更新履歴
 
-- **2026-04-25**: DeepSeek V4-Pro（80.6%、rank 4）、GPT-5.5（SWE-bench Pro 58.6% Kimi K2.6と同率SOTA、Terminal-Bench 2.0 82.7% 新SOTA）を追加。DeepSeek V4-Pro は Gemini 3.1 Pro と同スコアで4位、MIT ライセンス open-weight、Huawei Ascend 950PR 訓練。
+- **2026-05-11**: Claude Opus 4.7（87.6%、rank 1）を追加。SWE-bench Verified で 87.6% を達成し全モデル1位に。SWE-bench Pro 64.3% も新SOTA。高解像度画像（2576px/3.75MP）・xhigh エフォートレベル・1Mコンテキスト（追加料金なし）を搭載。価格は Opus 4.6 と同じ $5.00/$25.00 per 1M tokens。
+- **2026-04-25**: DeepSeek V4-Pro（80.6%、rank 5）、GPT-5.5（SWE-bench Pro 58.6% Kimi K2.6と同率SOTA、Terminal-Bench 2.0 82.7% 新SOTA）を追加。DeepSeek V4-Pro は Gemini 3.1 Pro と同スコアで5位、MIT ライセンス open-weight、Huawei Ascend 950PR 訓練。
 - **2026-04-21**: Kimi K2.6（80.2%、rank 5→6）を追加。SWE-bench Pro 58.6%で新SOTA達成（GPT-5.3 Codexの56.8%を更新）、Terminal-Bench 2.0 66.7%（全モデル2位）、LiveCodeBench v6 89.6%、~1T MoEオープンウェイトモデル。
 - **2026-04-12**: MiniMax M2.7（78.0%、rank 9→10）を追加。世界初の自己進化型エージェントモデル、SWE-bench Pro 56.22%、Terminal-Bench 2.0 57.0%（全モデル3位）、Multi-SWE-Bench 52.7%。Qwen 3.6 Plus（78.8%、rank 7）、GLM-5.1（78.5%、rank 8）、Qwen 3.6（74.2%、rank 16）も追加。READMEのランキングをCSV・JSONと完全同期。
 - **2026-02-23**: Gemini 3.1 Pro（80.6%）を追加。3位にランクイン、ARC-AGI-2 77.1%（全モデル最高）、GPQA Diamond 94.3%、SWE-bench Pro 54.2%（4位）。Gemini 3 Proから2.5倍の推論強化、同価格で大幅性能向上
